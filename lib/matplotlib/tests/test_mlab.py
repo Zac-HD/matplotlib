@@ -1224,7 +1224,6 @@ class TestSpectral(object):
             NFFT_spectrum_real = NFFT_spectrum = pad_to_spectrum_real
         else:
             NFFT_spectrum_real = NFFT_spectrum = len(x)
-        nover_spectrum_real = nover_spectrum = 0
 
         NFFT_specgram = NFFT_density
         nover_specgram = nover_density
@@ -1309,7 +1308,7 @@ class TestSpectral(object):
         cls.pad_to_density = pad_to_density
 
         cls.NFFT_spectrum = NFFT_spectrum
-        cls.nover_spectrum = nover_spectrum
+        cls.nover_spectrum = 0
         cls.pad_to_spectrum = pad_to_spectrum
 
         cls.NFFT_specgram = NFFT_specgram

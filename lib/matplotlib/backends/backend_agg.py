@@ -366,8 +366,6 @@ class RendererAgg(RendererBase):
         # WARNING:  For agg_filter to work, the renderer's method need to
         # overridden in the class. See draw_markers and draw_path_collections.
 
-        width, height = int(self.width), int(self.height)
-
         buffer, bounds = self.tostring_rgba_minimized()
 
         l, b, w, h = bounds
@@ -384,7 +382,7 @@ class RendererAgg(RendererBase):
                 img = np.asarray(img * 255., np.uint8)
             img = img[::-1]
             self._renderer.draw_image(
-                gc, l + ox, height - b - h + oy, img)
+                gc, l + ox, int(self.height) - b - h + oy, img)
 
 
 class FigureCanvasAgg(FigureCanvasBase):

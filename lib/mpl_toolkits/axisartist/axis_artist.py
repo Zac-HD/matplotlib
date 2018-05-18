@@ -1316,10 +1316,8 @@ class AxisArtist(martist.Artist):
 
         bb = [b for b in bb if b and (b.width!=0 or b.height!=0)]
         if bb:
-            _bbox = Bbox.union(bb)
-            return _bbox
-        else:
-            return None
+            return Bbox.union(bb)
+        return None
 
 
     @allow_rasterization

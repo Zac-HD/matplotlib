@@ -217,7 +217,7 @@ class CbarAxesLocator(object):
         cory = 1./(1. - corx)
         x1, y1, w, h = 0, 0, 1, 1
         x2, y2 = x1 + w, y1 + h
-        dw, dh = w*extesion_fraction, h*extesion_fraction*cory
+        dh = h * extesion_fraction * cory
 
         if self.extend in ["min", "both"]:
             bottom = [(x1, y1),
