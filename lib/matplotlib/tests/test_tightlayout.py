@@ -40,7 +40,7 @@ def test_tight_layout2():
 def test_tight_layout3():
     'Test tight_layout for multiple subplots'
 
-    fig = plt.figure()
+    plt.figure()
 
     ax1 = plt.subplot(221)
     ax2 = plt.subplot(223)
@@ -58,7 +58,7 @@ def test_tight_layout3():
 def test_tight_layout4():
     'Test tight_layout for subplot2grid'
 
-    fig = plt.figure()
+    plt.figure()
 
     ax1 = plt.subplot2grid((3, 3), (0, 0))
     ax2 = plt.subplot2grid((3, 3), (0, 1), colspan=2)
@@ -77,7 +77,7 @@ def test_tight_layout4():
 def test_tight_layout5():
     'Test tight_layout for image'
 
-    fig = plt.figure()
+    plt.figure()
 
     ax = plt.subplot(111)
     arr = np.arange(100).reshape((10, 10))

@@ -90,22 +90,22 @@ def test_formatter_ticker():
     ydata1 = [(1.5*y - 0.5)*units.km for y in range(10)]
     ydata2 = [(1.75*y - 1.0)*units.km for y in range(10)]
 
-    fig = plt.figure()
+    plt.figure()
     ax = plt.subplot(111)
     ax.set_xlabel("x-label 001")
 
-    fig = plt.figure()
+    plt.figure()
     ax = plt.subplot(111)
     ax.set_xlabel("x-label 001")
     ax.plot(xdata, ydata1, color='blue', xunits="sec")
 
-    fig = plt.figure()
+    plt.figure()
     ax = plt.subplot(111)
     ax.set_xlabel("x-label 001")
     ax.plot(xdata, ydata1, color='blue', xunits="sec")
     ax.set_xlabel("x-label 003")
 
-    fig = plt.figure()
+    plt.figure()
     ax = plt.subplot(111)
     ax.plot(xdata, ydata1, color='blue', xunits="sec")
     ax.plot(xdata, ydata2, color='green', xunits="hour")
@@ -113,7 +113,7 @@ def test_formatter_ticker():
 
     # See SF bug 2846058
     # https://sourceforge.net/tracker/?func=detail&aid=2846058&group_id=80706&atid=560720
-    fig = plt.figure()
+    plt.figure()
     ax = plt.subplot(111)
     ax.plot(xdata, ydata1, color='blue', xunits="sec")
     ax.plot(xdata, ydata2, color='green', xunits="hour")
@@ -153,8 +153,8 @@ def test_twin_axis_locaters_formatters():
     ax1.xaxis.set_minor_locator(plt.FixedLocator([15, 35, 55, 75]))
     ax1.xaxis.set_major_formatter(plt.FormatStrFormatter('%05.2lf'))
     ax1.xaxis.set_minor_formatter(plt.FixedFormatter(['c', '3', 'p', 'o']))
-    ax2 = ax1.twiny()
-    ax3 = ax1.twinx()
+    ax1.twiny()
+    ax1.twinx()
 
 
 def test_twinx_cla():
@@ -266,7 +266,7 @@ def test_inverted_cla():
 @image_comparison(baseline_images=["minorticks_on_rcParams_both"],
                   extensions=['png'])
 def test_minorticks_on_rcParams_both():
-    fig = plt.figure()
+    plt.figure()
     matplotlib.rcParams['xtick.minor.visible'] = True
     matplotlib.rcParams['ytick.minor.visible'] = True
 
@@ -528,7 +528,7 @@ def test_single_point():
     matplotlib.rcParams['lines.marker'] = 'o'
     matplotlib.rcParams['axes.grid'] = True
 
-    fig = plt.figure()
+    plt.figure()
     plt.subplot(211)
     plt.plot([0], [0], 'o')
 
@@ -538,7 +538,7 @@ def test_single_point():
     # Reuse testcase from above for a labeled data test
     data = {'a': [0], 'b': [1]}
 
-    fig = plt.figure()
+    plt.figure()
     plt.subplot(211)
     plt.plot('a', 'a', 'o', data=data)
 
@@ -551,7 +551,7 @@ def test_single_date():
     time1 = [721964.0]
     data1 = [-65.54]
 
-    fig = plt.figure()
+    plt.figure()
     plt.subplot(211)
     plt.plot_date(time1, data1, 'o', color='r')
 
@@ -595,7 +595,7 @@ def test_shaped_data():
     y1 = np.arange(10).reshape((1, -1))
     y2 = np.arange(10).reshape((-1, 1))
 
-    fig = plt.figure()
+    plt.figure()
     plt.subplot(411)
     plt.plot(y1)
     plt.subplot(412)
@@ -621,7 +621,7 @@ def test_structured_data():
 
 @image_comparison(baseline_images=['const_xy'])
 def test_const_xy():
-    fig = plt.figure()
+    plt.figure()
 
     plt.subplot(311)
     plt.plot(np.arange(10), np.ones((10,)))
@@ -664,14 +664,14 @@ def test_polar_units():
 
     y1 = [1.0, 2.0, 3.0, 4.0]
 
-    fig = plt.figure()
+    plt.figure()
 
     plt.polar(x2, y1, color="blue")
 
     # polar(x2, y1, color = "red", xunits="rad")
     # polar(x2, y2, color = "green")
 
-    fig = plt.figure()
+    plt.figure()
 
     # make sure runits and theta units work
     y1 = [y*km for y in y1]
@@ -780,7 +780,7 @@ def test_axvspan_epoch():
 
     dt = units.Duration("ET", units.day.convert("sec"))
 
-    fig = plt.figure()
+    plt.figure()
 
     plt.axvspan(t0, tf, facecolor="blue", alpha=0.25)
 
@@ -800,7 +800,7 @@ def test_axhspan_epoch():
 
     dt = units.Duration("ET", units.day.convert("sec"))
 
-    fig = plt.figure()
+    plt.figure()
 
     plt.axhspan(t0, tf, facecolor="blue", alpha=0.25)
 
@@ -1540,16 +1540,16 @@ def test_hist_steplog():
     data_big = data_pos + 30
     weights = np.ones_like(data) * 1.e-5
 
-    ax = plt.subplot(4, 1, 1)
+    plt.subplot(4, 1, 1)
     plt.hist(data, 100, histtype='stepfilled', log=True)
 
-    ax = plt.subplot(4, 1, 2)
+    plt.subplot(4, 1, 2)
     plt.hist(data_pos, 100, histtype='stepfilled', log=True)
 
-    ax = plt.subplot(4, 1, 3)
+    plt.subplot(4, 1, 3)
     plt.hist(data, 100, weights=weights, histtype='stepfilled', log=True)
 
-    ax = plt.subplot(4, 1, 4)
+    plt.subplot(4, 1, 4)
     plt.hist(data_big, 100, histtype='stepfilled', log=True,
              orientation='horizontal')
 
@@ -1639,9 +1639,8 @@ def test_contour_hatching():
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    cs = ax.contourf(x, y, z, hatches=['-', '/', '\\', '//'],
-                     cmap=plt.get_cmap('gray'),
-                     extend='both', alpha=0.5)
+    ax.contourf(x, y, z, hatches=['-', '/', '\\', '//'],
+                cmap=plt.get_cmap('gray'), extend='both', alpha=0.5)
 
 
 @image_comparison(baseline_images=['contour_colorbar'])
@@ -3197,7 +3196,7 @@ def test_eventplot_defaults():
 
     fig = plt.figure()
     axobj = fig.add_subplot(111)
-    colls = axobj.eventplot(data)
+    axobj.eventplot(data)
 
 
 @pytest.mark.parametrize(('colors'), [
@@ -5374,7 +5373,7 @@ def test_date_timezone_x():
         year=2016, month=2, day=22, hour=x)) for x in range(3)]
 
     # Same Timezone
-    fig = plt.figure(figsize=(20, 12))
+    plt.figure(figsize=(20, 12))
     plt.subplot(2, 1, 1)
     plt.plot_date(time_index, [3] * 3, tz='Canada/Eastern')
 
@@ -5391,7 +5390,7 @@ def test_date_timezone_y():
         year=2016, month=2, day=22, hour=x)) for x in range(3)]
 
     # Same Timezone
-    fig = plt.figure(figsize=(20, 12))
+    plt.figure(figsize=(20, 12))
     plt.subplot(2, 1, 1)
     plt.plot_date([3] * 3,
                   time_index, tz='Canada/Eastern', xdate=False, ydate=True)
@@ -5409,7 +5408,7 @@ def test_date_timezone_x_and_y():
         year=2016, month=2, day=22, hour=x)) for x in range(3)]
 
     # Same Timezone
-    fig = plt.figure(figsize=(20, 12))
+    plt.figure(figsize=(20, 12))
     plt.subplot(2, 1, 1)
     plt.plot_date(time_index, time_index, tz='UTC', ydate=True)
 

@@ -284,7 +284,7 @@ class AxisArtistHelperRectlinear(object):
 
             get_label_transform() returns a transform of (transAxes+offset)
             """
-            loc = self._axis_direction
+            self._axis_direction
             #angle = dict(left=0,
             #             right=0,
             #             bottom=.5*np.pi,

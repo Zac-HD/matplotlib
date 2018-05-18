@@ -966,7 +966,7 @@ class ConfigureSubplotsTk(backend_tools.ConfigureSubplotsBase):
 
         canvas = type(self.canvas)(toolfig, master=self.window)
         toolfig.subplots_adjust(top=0.9)
-        _tool = SubplotTool(self.figure, toolfig)
+        SubplotTool(self.figure, toolfig)
         canvas.draw()
         canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
         self.window.protocol("WM_DELETE_WINDOW", self.destroy)

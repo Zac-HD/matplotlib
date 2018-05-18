@@ -577,31 +577,31 @@ class TestDetrend(object):
     def test_detrend_none_0D_zeros(self):
         input = 0.
         targ = input
-        res = mlab.detrend_none(input)
+        mlab.detrend_none(input)
         assert input == targ
 
     def test_detrend_none_0D_zeros_axis1(self):
         input = 0.
         targ = input
-        res = mlab.detrend_none(input, axis=1)
+        mlab.detrend_none(input, axis=1)
         assert input == targ
 
     def test_detrend_str_none_0D_zeros(self):
         input = 0.
         targ = input
-        res = mlab.detrend(input, key='none')
+        mlab.detrend(input, key='none')
         assert input == targ
 
     def test_detrend_detrend_none_0D_zeros(self):
         input = 0.
         targ = input
-        res = mlab.detrend(input, key=mlab.detrend_none)
+        mlab.detrend(input, key=mlab.detrend_none)
         assert input == targ
 
     def test_detrend_none_0D_off(self):
         input = 5.5
         targ = input
-        res = mlab.detrend_none(input)
+        mlab.detrend_none(input)
         assert input == targ
 
     def test_detrend_none_1D_off(self):

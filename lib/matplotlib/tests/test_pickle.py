@@ -115,7 +115,7 @@ def test_no_pyplot():
     from matplotlib.figure import Figure
 
     fig = Figure()
-    _ = fc(fig)
+    fc(fig)
     ax = fig.add_subplot(1, 1, 1)
     ax.plot([1, 2, 3], [1, 2, 3])
     pickle.dump(fig, BytesIO(), pickle.HIGHEST_PROTOCOL)
@@ -140,7 +140,7 @@ def test_image():
 
 
 def test_polar():
-    ax = plt.subplot(111, polar=True)
+    plt.subplot(111, polar=True)
     fig = plt.gcf()
     pf = pickle.dumps(fig)
     pickle.loads(pf)
