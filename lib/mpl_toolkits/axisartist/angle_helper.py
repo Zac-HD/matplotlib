@@ -116,7 +116,7 @@ def select_step(v1, v2, nv, hour=False, include_last=True,
         factor = factor * threshold_factor
 
 
-    f1, f2, fstep = v1*factor, v2*factor, step/factor
+    f1, f2 = v1*factor, v2*factor
     levs = np.arange(np.floor(f1/step), np.ceil(f2/step)+0.5, dtype=int) * step
 
     # n : number of valid levels. If there is a cycle, e.g., [0, 90, 180,

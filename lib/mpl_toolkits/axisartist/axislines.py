@@ -448,9 +448,6 @@ class GridHelperRectlinear(GridHelperBase):
                 "'new_floating_axis' explicitly requires the axes keyword.")
             axes = self.axes
 
-        passthrough_point = (value, value)
-        transform = axes.transData
-
         _helper = AxisArtistHelperRectlinear.Floating(
             axes, nth_coord, value, axis_direction)
 

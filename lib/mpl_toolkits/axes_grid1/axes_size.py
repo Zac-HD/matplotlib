@@ -130,7 +130,6 @@ class AxesY(_Base):
         l1, l2 = self._axes.get_ylim()
 
         if self._aspect == "axes":
-            ref_aspect = _get_axes_aspect(self._ref_ax)
             aspect = _get_axes_aspect(self._axes)
         else:
             aspect = self._aspect

@@ -41,7 +41,6 @@ class FigureCanvasWxAgg(FigureCanvasAgg, _FigureCanvasWxBase):
             return
 
         l, b, w, h = bbox.bounds
-        r = l + w
         t = b + h
         x = int(l)
         y = int(self.bitmap.GetHeight() - t)
@@ -104,7 +103,6 @@ def _WX28_clipped_agg_as_bitmap(agg, bbox):
     Note: agg must be a backend_agg.RendererAgg instance.
     """
     l, b, width, height = bbox.bounds
-    r = l + width
     t = b + height
 
     srcBmp = wx.Bitmap.FromBufferRGBA(int(agg.width), int(agg.height),

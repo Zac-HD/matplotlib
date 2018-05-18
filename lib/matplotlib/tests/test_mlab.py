@@ -1501,7 +1501,6 @@ class TestSpectral(object):
     def test_psd_detrend_mean_func_offset(self):
         if self.NFFT_density is None:
             return
-        freqs = self.freqs_density
         ydata = np.zeros(self.NFFT_density)
         ydata1 = ydata+5
         ydata2 = ydata+3.3
@@ -1537,7 +1536,6 @@ class TestSpectral(object):
     def test_psd_detrend_mean_str_offset(self):
         if self.NFFT_density is None:
             return
-        freqs = self.freqs_density
         ydata = np.zeros(self.NFFT_density)
         ydata1 = ydata+5
         ydata2 = ydata+3.3
@@ -1573,7 +1571,6 @@ class TestSpectral(object):
     def test_psd_detrend_linear_func_trend(self):
         if self.NFFT_density is None:
             return
-        freqs = self.freqs_density
         ydata = np.arange(self.NFFT_density)
         ydata1 = ydata+5
         ydata2 = ydata+3.3
@@ -1609,7 +1606,6 @@ class TestSpectral(object):
     def test_psd_detrend_linear_str_trend(self):
         if self.NFFT_density is None:
             return
-        freqs = self.freqs_density
         ydata = np.arange(self.NFFT_density)
         ydata1 = ydata+5
         ydata2 = ydata+3.3
@@ -1645,7 +1641,6 @@ class TestSpectral(object):
     def test_psd_window_hanning(self):
         if self.NFFT_density is None:
             return
-        freqs = self.freqs_density
         ydata = np.arange(self.NFFT_density)
         ydata1 = ydata+5
         ydata2 = ydata+3.3
@@ -1689,7 +1684,6 @@ class TestSpectral(object):
     def test_psd_window_hanning_detrend_linear(self):
         if self.NFFT_density is None:
             return
-        freqs = self.freqs_density
         ydata = np.arange(self.NFFT_density)
         ycontrol = np.zeros(self.NFFT_density)
         ydata1 = ydata+5
@@ -1748,7 +1742,6 @@ class TestSpectral(object):
         assert spec.shape == freqs.shape
 
     def test_psd_windowarray_scale_by_freq(self):
-        freqs = self.freqs_density
         win = mlab.window_hanning(np.ones(self.NFFT_density_real))
 
         spec, fsp = mlab.psd(x=self.y,
@@ -1937,7 +1930,6 @@ class TestSpectral(object):
                                      pad_to=self.pad_to_specgram,
                                      sides=self.sides,
                                      mode='angle')
-        specm = np.mean(spec, axis=1)
         assert_allclose(fsp, freqs, atol=1e-06)
         assert_allclose(t, self.t_specgram, atol=1e-06)
 
@@ -1953,7 +1945,6 @@ class TestSpectral(object):
                                      pad_to=self.pad_to_specgram,
                                      sides=self.sides,
                                      mode='phase')
-        specm = np.mean(spec, axis=1)
 
         assert_allclose(fsp, freqs, atol=1e-06)
         assert_allclose(t, self.t_specgram, atol=1e-06)
@@ -1971,7 +1962,6 @@ class TestSpectral(object):
         assert str(w[0].message).startswith("Only one segment is calculated")
 
     def test_psd_csd_equal(self):
-        freqs = self.freqs_density
         Pxx, freqsxx = mlab.psd(x=self.y,
                                 NFFT=self.NFFT_density,
                                 Fs=self.Fs,
@@ -1990,7 +1980,6 @@ class TestSpectral(object):
     def test_specgram_auto_default_equal(self):
         '''test that mlab.specgram without mode and with mode 'default' and
         'psd' are all the same'''
-        freqs = self.freqs_specgram
         speca, freqspeca, ta = mlab.specgram(x=self.y,
                                              NFFT=self.NFFT_specgram,
                                              Fs=self.Fs,
@@ -2011,7 +2000,6 @@ class TestSpectral(object):
     def test_specgram_auto_psd_equal(self):
         '''test that mlab.specgram without mode and with mode 'default' and
         'psd' are all the same'''
-        freqs = self.freqs_specgram
         speca, freqspeca, ta = mlab.specgram(x=self.y,
                                              NFFT=self.NFFT_specgram,
                                              Fs=self.Fs,
@@ -2030,7 +2018,6 @@ class TestSpectral(object):
         assert_array_equal(ta, tc)
 
     def test_specgram_complex_mag_equivalent(self):
-        freqs = self.freqs_specgram
         specc, freqspecc, tc = mlab.specgram(x=self.y,
                                              NFFT=self.NFFT_specgram,
                                              Fs=self.Fs,
@@ -2051,7 +2038,6 @@ class TestSpectral(object):
         assert_allclose(np.abs(specc), specm, atol=1e-06)
 
     def test_specgram_complex_angle_equivalent(self):
-        freqs = self.freqs_specgram
         specc, freqspecc, tc = mlab.specgram(x=self.y,
                                              NFFT=self.NFFT_specgram,
                                              Fs=self.Fs,
@@ -2072,7 +2058,6 @@ class TestSpectral(object):
         assert_allclose(np.angle(specc), speca, atol=1e-06)
 
     def test_specgram_complex_phase_equivalent(self):
-        freqs = self.freqs_specgram
         specc, freqspecc, tc = mlab.specgram(x=self.y,
                                              NFFT=self.NFFT_specgram,
                                              Fs=self.Fs,
@@ -2094,7 +2079,6 @@ class TestSpectral(object):
                         atol=1e-06)
 
     def test_specgram_angle_phase_equivalent(self):
-        freqs = self.freqs_specgram
         speca, freqspeca, ta = mlab.specgram(x=self.y,
                                              NFFT=self.NFFT_specgram,
                                              Fs=self.Fs,
@@ -2116,7 +2100,6 @@ class TestSpectral(object):
                         atol=1e-06)
 
     def test_psd_windowarray_equal(self):
-        freqs = self.freqs_density
         win = mlab.window_hanning(np.ones(self.NFFT_density_real))
         speca, fspa = mlab.psd(x=self.y,
                                NFFT=self.NFFT_density,

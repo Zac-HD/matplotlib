@@ -122,7 +122,6 @@ def test_constrained_layout7():
         gs = gridspec.GridSpec(1, 2)
         gsl = gridspec.GridSpecFromSubplotSpec(2, 2, gs[0])
         gsr = gridspec.GridSpecFromSubplotSpec(1, 2, gs[1])
-        axsl = []
         for gs in gsl:
             ax = fig.add_subplot(gs)
         # need to trigger a draw to get warning

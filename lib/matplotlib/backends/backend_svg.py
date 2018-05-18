@@ -999,13 +999,10 @@ class RendererSVG(RendererBase):
 
             fontsize = prop.get_size_in_points()
 
-            fontfamily = font.family_name
-            fontstyle = prop.get_style()
-
             attrib = {}
             # Must add "px" to workaround a Firefox bug
             style['font-size'] = short_float_fmt(fontsize) + 'px'
-            style['font-family'] = str(fontfamily)
+            style['font-family'] = str(font.family_name)
             style['font-style'] = prop.get_style().lower()
             style['font-weight'] = str(prop.get_weight()).lower()
             attrib['style'] = generate_css(style)

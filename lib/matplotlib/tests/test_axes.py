@@ -457,11 +457,7 @@ def test_polar_alignment():
     '''
     Test that changing the vertical/horizontal alignment of a polar graph
     works as expected '''
-    ranges = [(0, 5), (0, 5)]
-
     angles = np.arange(0, 360, 90)
-
-    levels = 5
 
     fig = plt.figure()
 
@@ -477,7 +473,6 @@ def test_polar_alignment():
     vertical.patch.set_visible(False)
 
     for i in range(2):
-        grid = np.linspace(*ranges[i], num=levels)
         gridValues = [0, 0.2, 0.4, 0.6, 0.8, 1]
         axes[i].set_rgrids(gridValues, angle=angles[i],
                            horizontalalignment='left',
@@ -662,15 +657,12 @@ def test_polar_units():
     import matplotlib.testing.jpl_units as units
     units.register()
 
-    pi = np.pi
     deg = units.deg
     km = units.km
 
-    x1 = [pi/6.0, pi/4.0, pi/3.0, pi/2.0]
     x2 = [30.0*deg, 45.0*deg, 60.0*deg, 90.0*deg]
 
     y1 = [1.0, 2.0, 3.0, 4.0]
-    y2 = [4.0, 3.0, 2.0, 1.0]
 
     fig = plt.figure()
 
@@ -3469,8 +3461,6 @@ def test_step_linestyle():
 def test_mixed_collection():
     from matplotlib import patches
     from matplotlib import collections
-
-    x = list(range(10))
 
     # First illustrate basic pyplot interface, using defaults where possible.
     fig = plt.figure()
