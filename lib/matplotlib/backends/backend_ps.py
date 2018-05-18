@@ -7,7 +7,7 @@ import logging
 import subprocess
 
 from tempfile import mkstemp
-from matplotlib import cbook, __version__, rcParams, checkdep_ghostscript
+from matplotlib import __version__, rcParams, checkdep_ghostscript
 from matplotlib.afm import AFM
 from matplotlib.backend_bases import (
     _Backend, FigureCanvasBase, FigureManagerBase, GraphicsContextBase,

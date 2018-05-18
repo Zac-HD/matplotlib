@@ -1,10 +1,7 @@
 import wx
 
-import matplotlib
 from .backend_agg import FigureCanvasAgg
-from .backend_wx import (
-    _BackendWx, _FigureCanvasWxBase, FigureFrameWx,
-    NavigationToolbar2Wx as NavigationToolbar2WxAgg)
+from .backend_wx import _BackendWx, _FigureCanvasWxBase, FigureFrameWx
 
 
 class FigureFrameWxAgg(FigureFrameWx):
