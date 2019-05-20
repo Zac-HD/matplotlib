@@ -29,9 +29,9 @@ def format_coord(x, y):
     row = int(y + 0.5)
     if col >= 0 and col < numcols and row >= 0 and row < numrows:
         z = X[row, col]
-        return 'x=%1.4f, y=%1.4f, z=%1.4f' % (x, y, z)
+        return f'x={x:1.4f}, y={y:1.4f}, z={z:1.4f}'
     else:
-        return 'x=%1.4f, y=%1.4f' % (x, y)
+        return f'x={x:1.4f}, y={y:1.4f}'
 
 ax.format_coord = format_coord
 plt.show()

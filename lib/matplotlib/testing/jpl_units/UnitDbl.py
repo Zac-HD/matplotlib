@@ -3,7 +3,7 @@
 import operator
 
 
-class UnitDbl(object):
+class UnitDbl:
     """Class UnitDbl in development.
     """
     # Unit conversion table.  Small subset of the full one but enough
@@ -193,11 +193,11 @@ class UnitDbl(object):
 
     def __str__(self):
         """Print the UnitDbl."""
-        return "%g *%s" % (self._value, self._units)
+        return f"{self._value:g} *{self._units}"
 
     def __repr__(self):
         """Print the UnitDbl."""
-        return "UnitDbl(%g, '%s')" % (self._value, self._units)
+        return f"UnitDbl({self._value:g}, '{self._units}')"
 
     def type(self):
         """Return the type of UnitDbl data."""

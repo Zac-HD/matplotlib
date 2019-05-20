@@ -40,7 +40,7 @@ def _get_dash_pattern(style):
     # dashed styles
     elif style in ['dashed', 'dashdot', 'dotted']:
         offset = 0
-        dashes = tuple(rcParams['lines.{}_pattern'.format(style)])
+        dashes = tuple(rcParams[f'lines.{style}_pattern'])
     #
     elif isinstance(style, tuple):
         offset, dashes = style
@@ -263,7 +263,7 @@ class Line2D(Artist):
         elif self._x is None:
             return "Line2D()"
         elif len(self._x) > 3:
-            return "Line2D((%g,%g),(%g,%g),...,(%g,%g))" % (
+            return "Line2D(({:g},{:g}),({:g},{:g}),...,({:g},{:g}))".format(
                 self._x[0], self._y[0], self._x[0],
                 self._y[0], self._x[-1], self._y[-1])
         else:
@@ -1448,7 +1448,7 @@ class Line2D(Artist):
         return self._linestyle in ('--', '-.', ':')
 
 
-class VertexSelector(object):
+class VertexSelector:
     """
     Manage the callbacks to maintain a list of selected vertices for
     :class:`matplotlib.lines.Line2D`. Derived classes should override

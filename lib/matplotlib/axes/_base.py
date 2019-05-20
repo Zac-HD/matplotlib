@@ -98,7 +98,7 @@ def _process_plot_format(fmt):
             i += 1
         elif c == 'C' and i < len(fmt) - 1:
             color_cycle_number = int(fmt[i + 1])
-            color = mcolors.to_rgba("C{}".format(color_cycle_number))
+            color = mcolors.to_rgba(f"C{color_cycle_number}")
             i += 2
         else:
             raise ValueError(
@@ -114,7 +114,7 @@ def _process_plot_format(fmt):
     return linestyle, marker, color
 
 
-class _process_plot_var_args(object):
+class _process_plot_var_args:
     """
     Process variable length arguments to the plot command, so that
     plot commands like the following are supported::
@@ -3889,7 +3889,7 @@ class _AxesBase(martist.Artist):
             ys = '???'
         else:
             ys = self.format_ydata(y)
-        return 'x=%s y=%s' % (xs, ys)
+        return f'x={xs} y={ys}'
 
     def minorticks_on(self):
         """

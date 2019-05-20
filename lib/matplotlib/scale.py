@@ -12,7 +12,7 @@ from matplotlib.ticker import (
 from matplotlib.transforms import Transform, IdentityTransform
 
 
-class ScaleBase(object):
+class ScaleBase:
     """
     The base class for all scales.
 
@@ -386,7 +386,7 @@ class LogScale(ScaleBase):
             raise ValueError(("provided too many kwargs, can only pass "
                               "{'basex', 'subsx', nonposx'} or "
                               "{'basey', 'subsy', nonposy'}.  You passed ") +
-                             "{!r}".format(kwargs))
+                             f"{kwargs!r}")
 
         if base <= 0 or base == 1:
             raise ValueError('The log base cannot be <= 0 or == 1')

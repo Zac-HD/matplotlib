@@ -541,7 +541,7 @@ class Collection(artist.Artist, cm.ScalarMappable):
 
         except ValueError:
             raise ValueError(
-                'Do not know how to convert {!r} to dashes'.format(ls))
+                f'Do not know how to convert {ls!r} to dashes')
 
         # get the list of raw 'unscaled' dash patterns
         self._us_linestyles = dashes
@@ -1625,10 +1625,10 @@ class EventCollection(LineCollection):
 
     def get_linewidth(self):
         """Get the width of the lines used to mark each event."""
-        return super(EventCollection, self).get_linewidth()[0]
+        return super().get_linewidth()[0]
 
     def get_linewidths(self):
-        return super(EventCollection, self).get_linewidth()
+        return super().get_linewidth()
 
     def get_color(self):
         '''

@@ -16,7 +16,7 @@ from matplotlib.transforms import Affine2D
 _log = logging.getLogger(__name__)
 
 
-class TextToPath(object):
+class TextToPath:
     """A class that converts strings to paths."""
 
     FONT_SCALE = 100.
@@ -47,7 +47,7 @@ class TextToPath(object):
         """
         Return a unique id for the given font and character-code set.
         """
-        return urllib.parse.quote('{}-{}'.format(font.postscript_name, ccode))
+        return urllib.parse.quote(f'{font.postscript_name}-{ccode}')
 
     def _get_char_id_ps(self, font, ccode):
         """

@@ -101,7 +101,7 @@ def latex2html(node, source):
     else:
         style = ''
 
-    return '<img src="%s/%s.png" %s%s/>' % (path, name, cls, style)
+    return f'<img src="{path}/{name}.png" {cls}{style}/>'
 
 
 def setup(app):

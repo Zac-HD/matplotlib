@@ -22,7 +22,7 @@ def on_move(event):
     x, y = event.x, event.y
     if event.inaxes:
         ax = event.inaxes  # the axes instance
-        print('data coords %f %f' % (event.xdata, event.ydata))
+        print(f'data coords {event.xdata:f} {event.ydata:f}')
 
 
 def on_click(event):

@@ -116,7 +116,7 @@ class Text(Artist):
     _cached = cbook.maxdict(50)
 
     def __repr__(self):
-        return "Text(%s, %s, %s)" % (self._x, self._y, repr(self._text))
+        return "Text({}, {}, {})".format(self._x, self._y, repr(self._text))
 
     def __init__(self,
                  x=0, y=0, text='',
@@ -1311,7 +1311,7 @@ class TextWithDash(Text):
     __name__ = 'textwithdash'
 
     def __str__(self):
-        return "TextWithDash(%g, %g, %r)" % (self._x, self._y, self._text)
+        return f"TextWithDash({self._x:g}, {self._y:g}, {self._text!r})"
 
     def __init__(self,
                  x=0, y=0, text='',
@@ -1657,7 +1657,7 @@ class TextWithDash(Text):
 docstring.interpd.update(TextWithDash=artist.kwdoc(TextWithDash))
 
 
-class OffsetFrom(object):
+class OffsetFrom:
     'Callable helper class for working with `Annotation`'
     def __init__(self, artist, ref_coord, unit="points"):
         '''
@@ -1740,7 +1740,7 @@ class OffsetFrom(object):
         return tr
 
 
-class _AnnotationBase(object):
+class _AnnotationBase:
     def __init__(self,
                  xy,
                  xycoords='data',
@@ -1970,7 +1970,7 @@ class Annotation(Text, _AnnotationBase):
     """
 
     def __str__(self):
-        return "Annotation(%g, %g, %r)" % (self.xy[0], self.xy[1], self._text)
+        return "Annotation({:g}, {:g}, {!r})".format(self.xy[0], self.xy[1], self._text)
 
     @cbook._rename_parameter("3.1", "s", "text")
     def __init__(self, text, xy,

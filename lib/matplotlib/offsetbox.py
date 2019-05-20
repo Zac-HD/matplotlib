@@ -88,7 +88,7 @@ def _get_packed_offsets(wd_list, total, sep, mode="fixed"):
         return total, offsets
 
     else:
-        raise ValueError("Unknown mode : %s" % (mode,))
+        raise ValueError(f"Unknown mode : {mode}")
 
 
 def _get_aligned_offsets(hd_list, height, align="baseline"):
@@ -123,7 +123,7 @@ def _get_aligned_offsets(hd_list, height, align="baseline"):
         descent = 0.
         offsets = [(height - h) * .5 + d for h, d in hd_list]
     else:
-        raise ValueError("Unknown Align mode : %s" % (align,))
+        raise ValueError(f"Unknown Align mode : {align}")
 
     return height, descent, offsets
 
@@ -1362,7 +1362,7 @@ class AnnotationBbox(martist.Artist, _AnnotationBase):
     zorder = 3
 
     def __str__(self):
-        return "AnnotationBbox(%g,%g)" % (self.xy[0], self.xy[1])
+        return "AnnotationBbox({:g},{:g})".format(self.xy[0], self.xy[1])
 
     @docstring.dedent_interpd
     def __init__(self, offsetbox, xy,
@@ -1594,7 +1594,7 @@ class AnnotationBbox(martist.Artist, _AnnotationBase):
         self.stale = False
 
 
-class DraggableBase(object):
+class DraggableBase:
     """
     helper code for a draggable artist (legend, offsetbox)
     The derived class must override following two method.

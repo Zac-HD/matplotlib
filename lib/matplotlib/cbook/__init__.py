@@ -87,7 +87,7 @@ class _StrongRef:
         return hash(self._obj)
 
 
-class CallbackRegistry(object):
+class CallbackRegistry:
     """Handle registering and disconnecting for a set of signals and callbacks:
 
         >>> def oneat(x):
@@ -529,7 +529,7 @@ def mkdirs(newdir, mode=0o777):
 
 
 @deprecated('3.0')
-class GetRealpathAndStat(object):
+class GetRealpathAndStat:
     def __init__(self):
         self._cache = {}
 
@@ -653,7 +653,7 @@ class maxdict(dict):
         dict.__setitem__(self, k, v)
 
 
-class Stack(object):
+class Stack:
     """
     Stack of elements with a movable cursor.
 
@@ -833,10 +833,10 @@ def print_cycles(objects, outstream=sys.stdout, show_progress=False):
             if isinstance(step, dict):
                 for key, val in step.items():
                     if val is next:
-                        outstream.write("[{!r}]".format(key))
+                        outstream.write(f"[{key!r}]")
                         break
                     if key is next:
-                        outstream.write("[key] = {!r}".format(val))
+                        outstream.write(f"[key] = {val!r}")
                         break
             elif isinstance(step, list):
                 outstream.write("[%d]" % step.index(next))
@@ -875,7 +875,7 @@ def print_cycles(objects, outstream=sys.stdout, show_progress=False):
         recurse(obj, obj, {}, [])
 
 
-class Grouper(object):
+class Grouper:
     """
     This class provides a lightweight way to group arbitrary objects
     together into disjoint sets when a full-blown graph data structure
@@ -1428,7 +1428,7 @@ def _reshape_2D(X, name):
         # 2D array, or 1D array of iterables: flatten them first.
         return [np.reshape(x, -1) for x in X]
     else:
-        raise ValueError("{} must have 2 or fewer dimensions".format(name))
+        raise ValueError(f"{name} must have 2 or fewer dimensions")
 
 
 def violin_stats(X, method, points=100, quantiles=None):
@@ -1827,7 +1827,7 @@ removing these folders and trying again.
 
 
 @deprecated("3.0")
-class Locked(object):
+class Locked:
     """
     Context manager to handle locks.
 
@@ -1991,7 +1991,7 @@ def _define_aliases(alias_d, cls=None):
                     setattr(cls, prefix + alias, method)
         if not exists:
             raise ValueError(
-                "Neither getter nor setter exists for {!r}".format(prop))
+                f"Neither getter nor setter exists for {prop!r}")
 
     if hasattr(cls, "_alias_map"):
         # Need to decide on conflict resolution policy.

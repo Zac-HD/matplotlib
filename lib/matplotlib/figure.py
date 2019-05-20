@@ -124,7 +124,7 @@ class _AxesStack(cbook.Stack):
         # All the error checking may be unnecessary; but this method
         # is called so seldom that the overhead is negligible.
         if not isinstance(a, Axes):
-            raise ValueError("second argument, {!r}, is not an Axes".format(a))
+            raise ValueError(f"second argument, {a!r}, is not an Axes")
         try:
             hash(key)
         except TypeError:
@@ -134,7 +134,7 @@ class _AxesStack(cbook.Stack):
         if a_existing is not None:
             super().remove((key, a_existing))
             cbook._warn_external(
-                "key {!r} already existed; Axes is being replaced".format(key))
+                f"key {key!r} already existed; Axes is being replaced")
             # I don't think the above should ever happen.
 
         if a in self:
@@ -166,7 +166,7 @@ class AxesStack(_AxesStack):
     pass
 
 
-class SubplotParams(object):
+class SubplotParams:
     """
     A class to hold the parameters for a subplot.
     """

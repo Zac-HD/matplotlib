@@ -316,7 +316,7 @@ def findSystemFonts(fontpaths=None, fontext='ttf'):
     return [fname for fname in fontfiles if os.path.exists(fname)]
 
 
-class FontEntry(object):
+class FontEntry:
     """
     A class for storing Font properties.  It is used when populating
     the font lookup dictionary.
@@ -342,7 +342,7 @@ class FontEntry(object):
             self.size = size
 
     def __repr__(self):
-        return "<Font '%s' (%s) %s %s %s %s>" % (
+        return "<Font '{}' ({}) {} {} {} {}>".format(
             self.name, os.path.basename(self.fname), self.style, self.variant,
             self.weight, self.stretch)
 
@@ -554,7 +554,7 @@ def createFontList(fontfiles, fontext='ttf'):
     return fontlist
 
 
-class FontProperties(object):
+class FontProperties:
     """
     A class for storing and manipulating font properties.
 
@@ -905,7 +905,7 @@ def json_dump(data, filename):
         try:
             json.dump(data, fh, cls=JSONEncoder, indent=2)
         except OSError as e:
-            _log.warning('Could not save font_manager cache {}'.format(e))
+            _log.warning(f'Could not save font_manager cache {e}')
 
 
 def json_load(filename):
@@ -927,7 +927,7 @@ def _normalize_font_family(family):
 
 
 @cbook.deprecated("3.0")
-class TempCache(object):
+class TempCache:
     """
     A class to store temporary caches that are (a) not saved to disk
     and (b) invalidated whenever certain font-related
@@ -964,7 +964,7 @@ class TempCache(object):
         self._lookup_cache[prop] = value
 
 
-class FontManager(object):
+class FontManager:
     """
     On import, the :class:`FontManager` singleton instance creates a
     list of TrueType fonts based on the font properties: name, style,
@@ -1318,7 +1318,7 @@ def is_opentype_cff_font(filename):
 
 _get_font = lru_cache(64)(ft2font.FT2Font)
 _fmcache = os.path.join(
-    mpl.get_cachedir(), 'fontlist-v{}.json'.format(FontManager.__version__))
+    mpl.get_cachedir(), f'fontlist-v{FontManager.__version__}.json')
 fontManager = None
 
 

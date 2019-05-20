@@ -54,7 +54,7 @@ def _stale_axes_callback(self, val):
 _XYPair = namedtuple("_XYPair", "x y")
 
 
-class Artist(object):
+class Artist:
     """
     Abstract base class for objects that render into a FigureCanvas.
 
@@ -1148,7 +1148,7 @@ class Artist(object):
             data[0]
         except (TypeError, IndexError):
             data = [data]
-        data_str = ', '.join('{:0.3g}'.format(item) for item in data
+        data_str = ', '.join(f'{item:0.3g}' for item in data
                              if isinstance(item, Number))
         return "[" + data_str + "]"
 
@@ -1168,7 +1168,7 @@ class Artist(object):
                 ax._mouseover_set.discard(self)
 
 
-class ArtistInspector(object):
+class ArtistInspector:
     """
     A helper class to inspect an `~matplotlib.artist.Artist` and return
     information about its settable properties and their current values.
@@ -1233,7 +1233,7 @@ class ArtistInspector(object):
 
         name = 'set_%s' % attr
         if not hasattr(self.o, name):
-            raise AttributeError('%s has no function %s' % (self.o, name))
+            raise AttributeError(f'{self.o} has no function {name}')
         func = getattr(self.o, name)
 
         docstring = inspect.getdoc(func)
@@ -1252,7 +1252,7 @@ class ArtistInspector(object):
         param_name = func.__code__.co_varnames[1]
         # We could set the presence * based on whether the parameter is a
         # varargs (it can't be a varkwargs) but it's not really worth the it.
-        match = re.search(r"(?m)^ *\*?{} : (.+)".format(param_name), docstring)
+        match = re.search(fr"(?m)^ *\*?{param_name} : (.+)", docstring)
         if match:
             return match.group(1)
 
@@ -1328,7 +1328,7 @@ class ArtistInspector(object):
         property, which does not, return 'transform'.
         """
         aliases = ''.join(' or %s' % x for x in sorted(self.aliasd.get(s, [])))
-        return ':meth:`%s <%s>`%s' % (s, target, aliases)
+        return f':meth:`{s} <{target}>`{aliases}'
 
     def pprint_setters(self, prop=None, leadingspace=2):
         """
@@ -1345,7 +1345,7 @@ class ArtistInspector(object):
             pad = ''
         if prop is not None:
             accepts = self.get_valid_values(prop)
-            return '%s%s: %s' % (pad, prop, accepts)
+            return f'{pad}{prop}: {accepts}'
 
         attrs = self._get_setters_and_targets()
         attrs.sort()
@@ -1355,7 +1355,7 @@ class ArtistInspector(object):
             accepts = self.get_valid_values(prop)
             name = self.aliased_name(prop)
 
-            lines.append('%s%s: %s' % (pad, name, accepts))
+            lines.append(f'{pad}{name}: {accepts}')
         return lines
 
     def pprint_setters_rest(self, prop=None, leadingspace=4):
@@ -1373,7 +1373,7 @@ class ArtistInspector(object):
             pad = ''
         if prop is not None:
             accepts = self.get_valid_values(prop)
-            return '%s%s: %s' % (pad, prop, accepts)
+            return f'{pad}{prop}: {accepts}'
 
         attrs = sorted(self._get_setters_and_targets())
 
@@ -1433,7 +1433,7 @@ class ArtistInspector(object):
             if len(s) > 50:
                 s = s[:50] + '...'
             name = self.aliased_name(name)
-            lines.append('    %s = %s' % (name, s))
+            lines.append(f'    {name} = {s}')
         return lines
 
 

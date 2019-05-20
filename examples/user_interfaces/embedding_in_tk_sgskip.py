@@ -33,7 +33,7 @@ canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
 
 
 def on_key_press(event):
-    print("you pressed {}".format(event.key))
+    print(f"you pressed {event.key}")
     key_press_handler(event, canvas, toolbar)
 
 

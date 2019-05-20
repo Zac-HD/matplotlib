@@ -382,7 +382,7 @@ def _get_executable_info(name):
                 f"version supported by Matplotlib is 3.0.")
         return info
     else:
-        raise ValueError("Unknown executable: {!r}".format(name))
+        raise ValueError(f"Unknown executable: {name!r}")
 
 
 @cbook.deprecated("3.1")
@@ -778,7 +778,7 @@ class RcParams(MutableMapping, dict):
             try:
                 cval = self.validate[key](val)
             except ValueError as ve:
-                raise ValueError("Key %s: %s" % (key, str(ve)))
+                raise ValueError("Key {}: {}".format(key, str(ve)))
             dict.__setitem__(self, key, cval)
         except KeyError:
             raise KeyError(
@@ -818,7 +818,7 @@ class RcParams(MutableMapping, dict):
             repr_split = pprint.pformat(dict(self), indent=1,
                                         width=80 - indent).split('\n')
         repr_indented = ('\n' + ' ' * indent).join(repr_split)
-        return '{}({})'.format(class_name, repr_indented)
+        return f'{class_name}({repr_indented})'
 
     def __str__(self):
         return '\n'.join(map('{0[0]}: {0[1]}'.format, sorted(self.items())))
@@ -1084,7 +1084,7 @@ def rc(group, **kwargs):
     for g in group:
         for k, v in kwargs.items():
             name = aliases.get(k) or k
-            key = '%s.%s' % (g, name)
+            key = f'{g}.{name}'
             try:
                 rcParams[key] = v
             except KeyError:
@@ -1350,9 +1350,9 @@ def _init_tests():
             "Matplotlib is not built with the correct FreeType version to run "
             "tests.  Set local_freetype=True in setup.cfg and rebuild. "
             "Expect many image comparison failures below. "
-            "Expected freetype version {0}. "
-            "Found freetype version {1}. "
-            "Freetype build type is {2}local".format(
+            "Expected freetype version {}. "
+            "Found freetype version {}. "
+            "Freetype build type is {}local".format(
                 LOCAL_FREETYPE_VERSION,
                 ft2font.__freetype_version__,
                 "" if ft2font.__freetype_build_type__ == 'local' else "not "))

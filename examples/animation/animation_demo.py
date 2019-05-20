@@ -23,6 +23,6 @@ fig, ax = plt.subplots()
 for i in range(len(data)):
     ax.cla()
     ax.imshow(data[i])
-    ax.set_title("frame {}".format(i))
+    ax.set_title(f"frame {i}")
     # Note that using time.sleep does *not* work here!
     plt.pause(0.1)

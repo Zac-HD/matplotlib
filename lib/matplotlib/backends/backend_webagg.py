@@ -155,7 +155,7 @@ class WebAggApplication(tornado.web.Application):
             if self.supports_binary:
                 self.write_message(blob, binary=True)
             else:
-                data_uri = "data:image/png;base64,{0}".format(
+                data_uri = "data:image/png;base64,{}".format(
                     blob.encode('base64').replace('\n', ''))
                 self.write_message(data_uri)
 
@@ -319,6 +319,6 @@ class _BackendWebAgg(_Backend):
             import webbrowser
             webbrowser.open(url)
         else:
-            print("To view figure, visit {0}".format(url))
+            print(f"To view figure, visit {url}")
 
         WebAggApplication.start()

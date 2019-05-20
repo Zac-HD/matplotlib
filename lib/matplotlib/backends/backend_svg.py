@@ -93,10 +93,10 @@ def short_float_fmt(x):
     Create a short string representation of a float, which is %f
     formatting with trailing zeros and the decimal point removed.
     """
-    return '{0:f}'.format(x).rstrip('0').rstrip('.')
+    return f'{x:f}'.rstrip('0').rstrip('.')
 
 
-class XMLWriter(object):
+class XMLWriter:
     """
     Parameters
     ----------
@@ -154,7 +154,7 @@ class XMLWriter(object):
             if not v == '':
                 k = escape_cdata(k)
                 v = escape_attrib(v)
-                self.__write(' %s="%s"' % (k, v))
+                self.__write(f' {k}="{v}"')
         self.__open = 1
         return len(self.__tags)-1
 
@@ -196,7 +196,7 @@ class XMLWriter(object):
         if tag:
             assert self.__tags, "unbalanced end(%s)" % tag
             assert escape_cdata(tag) == self.__tags[-1], \
-                "expected end(%s), got %s" % (self.__tags[-1], tag)
+                "expected end({}), got {}".format(self.__tags[-1], tag)
         else:
             assert self.__tags, "unbalanced end()"
         tag = self.__tags.pop()
@@ -249,7 +249,7 @@ def generate_transform(transform_list=[]):
                 continue
             if type == 'matrix' and isinstance(value, Affine2DBase):
                 value = value.to_values()
-            output.write('%s(%s)' % (
+            output.write('{}({})'.format(
                 type, ' '.join(short_float_fmt(x) for x in value)))
         return output.getvalue()
     return ''
@@ -262,7 +262,7 @@ def generate_css(attrib={}):
         for k, v in attrib:
             k = escape_attrib(k)
             v = escape_attrib(v)
-            output.write("%s:%s;" % (k, v))
+            output.write(f"{k}:{v};")
         return output.getvalue()
     return ''
 
@@ -301,7 +301,7 @@ class RendererSVG(RendererBase):
             'svg',
             width='%spt' % str_width,
             height='%spt' % str_height,
-            viewBox='0 0 %s %s' % (str_width, str_height),
+            viewBox=f'0 0 {str_width} {str_height}',
             xmlns="http://www.w3.org/2000/svg",
             version="1.1",
             attrib={'xmlns:xlink': "http://www.w3.org/1999/xlink"})
@@ -333,7 +333,7 @@ class RendererSVG(RendererBase):
         m = hashlib.md5()
         m.update(salt.encode('utf8'))
         m.update(str(content).encode('utf8'))
-        return '%s%s' % (type, m.hexdigest()[:10])
+        return '{}{}'.format(type, m.hexdigest()[:10])
 
     def _make_flip_transform(self, transform):
         return (transform +
@@ -623,7 +623,7 @@ class RendererSVG(RendererBase):
                 master_transform, paths, all_transforms)):
             transform = Affine2D(transform.get_matrix()).scale(1.0, -1.0)
             d = self._convert_path(path, transform, simplify=False)
-            oid = 'C%x_%x_%s' % (
+            oid = 'C{:x}_{:x}_{}'.format(
                 self._path_collection_id, i, self._make_id('', d))
             writer.element('path', id=oid, d=d)
             path_codes.append(oid)
@@ -1060,7 +1060,7 @@ class RendererSVG(RendererBase):
                 attrib['x'] = short_float_fmt(ax)
                 attrib['y'] = short_float_fmt(ay)
                 attrib['style'] = generate_css(style)
-                attrib['transform'] = "rotate(%s, %s, %s)" % (
+                attrib['transform'] = "rotate({}, {}, {})".format(
                     short_float_fmt(-angle),
                     short_float_fmt(ax),
                     short_float_fmt(ay))

@@ -71,7 +71,7 @@ def check_duplicates():
               'more than one name.\nConsider adding them to .mailmap.\n')
         for email, count in email_counter.items():
             if count > 1:
-                print('%s\n%s' % (email, '\n'.join(l for l in lines if email in l)))
+                print('{}\n{}'.format(email, '\n'.join(l for l in lines if email in l)))
 
 
 def generate_credits():

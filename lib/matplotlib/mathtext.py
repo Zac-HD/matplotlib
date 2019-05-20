@@ -84,7 +84,7 @@ def get_unicode_index(symbol, math=True):
 unichr_safe = cbook.deprecated("3.0")(chr)
 
 
-class MathtextBackend(object):
+class MathtextBackend:
     """
     The base class for the mathtext backend-specific code.  The
     purpose of :class:`MathtextBackend` subclasses is to interface
@@ -253,7 +253,7 @@ setfont
         self.pswriter.write(ps)
 
     def render_rect_filled(self, x1, y1, x2, y2):
-        ps = "%f %f %f %f rectfill\n" % (
+        ps = "{:f} {:f} {:f} {:f} rectfill\n".format(
             x1, self.height - y2, x2 - x1, y2 - y1)
         self.pswriter.write(ps)
 
@@ -383,7 +383,7 @@ class MathtextBackendCairo(MathtextBackend):
                 self.rects)
 
 
-class Fonts(object):
+class Fonts:
     """
     An abstract base class for a system of fonts to use for mathtext.
 
@@ -813,7 +813,7 @@ class UnicodeFonts(TruetypeFonts):
             except ValueError:
                 uniindex = ord('?')
                 _log.warning(
-                    "No TeX to unicode mapping for {!a}.".format(sym))
+                    f"No TeX to unicode mapping for {sym!a}.")
 
         fontname, uniindex = self._map_virtual_font(
             fontname, font_class, uniindex)
@@ -1153,7 +1153,7 @@ class StandardPsFonts(Fonts):
             found_symbol = True
         else:
             _log.warning(
-                "No TeX to built-in Postscript mapping for {!r}".format(sym))
+                f"No TeX to built-in Postscript mapping for {sym!r}")
 
         slanted = (fontname == 'it')
         font = self._get_font(fontname)
@@ -1257,7 +1257,7 @@ GROW_FACTOR     = 1.0 / SHRINK_FACTOR
 NUM_SIZE_LEVELS = 6
 
 
-class FontConstantsBase(object):
+class FontConstantsBase:
     """
     A set of constants that controls how certain things, such as sub-
     and superscripts are laid out.  These are all metrics that can't
@@ -1369,7 +1369,7 @@ class MathTextWarning(Warning):
     pass
 
 
-class Node(object):
+class Node:
     """
     A node in the TeX box model
     """
@@ -1567,7 +1567,7 @@ class List(Box):
         self.glue_order   = 0    # The order of infinity (0 - 3) for the glue
 
     def __repr__(self):
-        return '[%s <%.02f %.02f %.02f %.02f> %s]' % (
+        return '[{} <{:.02f} {:.02f} {:.02f} {:.02f}> {}]'.format(
             super().__repr__(),
             self.width, self.height,
             self.depth, self.shift_amount,
@@ -1878,7 +1878,7 @@ class Glue(Node):
             self.glue_spec.width *= GROW_FACTOR
 
 
-class GlueSpec(object):
+class GlueSpec:
     """
     See :class:`Glue`.
     """
@@ -2082,7 +2082,7 @@ class AutoWidthChar(Hlist):
         self.width = char.width
 
 
-class Ship(object):
+class Ship:
     """
     Once the boxes have been set up, this sends them to output.  Since
     boxes can be inside of boxes inside of boxes, the main work of
@@ -2251,7 +2251,7 @@ def Error(msg):
     return empty
 
 
-class Parser(object):
+class Parser:
     """
     This is the pyparsing-based parser for math expressions.  It
     actually parses full strings *containing* math expressions, in
@@ -2610,7 +2610,7 @@ class Parser(object):
     # entering and leaving a group { } or math/non-math, the stack
     # is pushed and popped accordingly.  The current state always
     # exists in the top element of the stack.
-    class State(object):
+    class State:
         """
         Stores the state of the parser.
 
@@ -3307,7 +3307,7 @@ class Parser(object):
 # MAIN
 
 
-class MathTextParser(object):
+class MathTextParser:
     _parser = None
 
     _backend_mapping = {

@@ -191,7 +191,7 @@ def _mathdefault(s):
     return '\\mathdefault{%s}' % s
 
 
-class _DummyAxis(object):
+class _DummyAxis:
     def __init__(self, minpos=0):
         self.dataLim = mtransforms.Bbox.unit()
         self.viewLim = mtransforms.Bbox.unit()
@@ -217,7 +217,7 @@ class _DummyAxis(object):
         return 9
 
 
-class TickHelper(object):
+class TickHelper:
     axis = None
 
     def set_axis(self, axis):
@@ -458,7 +458,7 @@ class OldScalarFormatter(Formatter):
             mantissa = tup[0].rstrip('0').rstrip('.')
             sign = tup[1][0].replace('+', '')
             exponent = tup[1][1:].lstrip('0')
-            s = '%se%s%s' % (mantissa, sign, exponent)
+            s = f'{mantissa}e{sign}{exponent}'
         else:
             s = s.rstrip('0').rstrip('.')
         return s
@@ -490,7 +490,7 @@ class OldScalarFormatter(Formatter):
             mantissa = tup[0].rstrip('0').rstrip('.')
             sign = tup[1][0].replace('+', '')
             exponent = tup[1][1:].lstrip('0')
-            s = '%se%s%s' % (mantissa, sign, exponent)
+            s = f'{mantissa}e{sign}{exponent}'
         else:
             s = s.rstrip('0').rstrip('.')
         return s
@@ -824,13 +824,13 @@ class ScalarFormatter(Formatter):
                     # reformat 1x10^y as 10^y
                     significand = ''
                 if exponent:
-                    exponent = '10^{%s%s}' % (sign, exponent)
+                    exponent = f'10^{{{sign}{exponent}}}'
                 if significand and exponent:
-                    return r'%s{\times}%s' % (significand, exponent)
+                    return fr'{significand}{{\times}}{exponent}'
                 else:
-                    return r'%s%s' % (significand, exponent)
+                    return fr'{significand}{exponent}'
             else:
-                s = ('%se%s%s' % (significand, sign, exponent)).rstrip('e')
+                s = (f'{significand}e{sign}{exponent}').rstrip('e')
                 return s
         except IndexError:
             return s
@@ -1134,10 +1134,10 @@ class LogFormatterMathtext(LogFormatter):
 
         if np.abs(fx) < min_exp:
             if usetex:
-                return r'${0}{1:g}$'.format(sign_string, x)
+                return fr'${sign_string}{x:g}$'
             else:
-                return '${0}$'.format(_mathdefault(
-                    '{0}{1:g}'.format(sign_string, x)))
+                return '${}$'.format(_mathdefault(
+                    f'{sign_string}{x:g}'))
         elif not is_x_decade:
             return self._non_decade_format(sign_string, base, fx, usetex)
         elif usetex:
@@ -1173,12 +1173,12 @@ class LogitFormatter(Formatter):
     def __call__(self, x, pos=None):
         s = ''
         if 0.01 <= x <= 0.99:
-            s = '{:.2f}'.format(x)
+            s = f'{x:.2f}'
         elif x < 0.01:
             if is_decade(x):
                 s = '$10^{{{:.0f}}}$'.format(np.log10(x))
             else:
-                s = '${:.5f}$'.format(x)
+                s = f'${x:.5f}$'
         else:  # x > 0.99
             if is_decade(1-x):
                 s = '$1-10^{{{:.0f}}}$'.format(np.log10(1-x))
@@ -1289,7 +1289,7 @@ class EngFormatter(Formatter):
         return ScalarFormatter.fix_minus(self, s)
 
     def __call__(self, x, pos=None):
-        s = "%s%s" % (self.format_eng(x), self.unit)
+        s = "{}{}".format(self.format_eng(x), self.unit)
         # Remove the trailing separator when there is neither prefix nor unit
         if self.sep and s.endswith(self.sep):
             s = s[:-len(self.sep)]
@@ -1311,7 +1311,7 @@ class EngFormatter(Formatter):
         '-1.00 \N{MICRO SIGN}'
         """
         sign = 1
-        fmt = "g" if self.places is None else ".{:d}f".format(self.places)
+        fmt = "g" if self.places is None else f".{self.places:d}f"
 
         if num < 0:
             sign = -1
@@ -1742,7 +1742,7 @@ def closeto(x, y):
 
 
 @cbook.deprecated("3.0")
-class Base(object):
+class Base:
     'this solution has some hacks to deal with floating point inaccuracies'
     def __init__(self, base):
         if base <= 0:

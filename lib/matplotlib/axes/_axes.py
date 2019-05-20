@@ -5707,7 +5707,7 @@ optional.
             numRows, numCols = C.shape
         else:
             raise TypeError(
-                'Illegal arguments to %s; see help(%s)' % (funcname, funcname))
+                f'Illegal arguments to {funcname}; see help({funcname})')
 
         Nx = X.shape[-1]
         Ny = Y.shape[0]
@@ -5719,7 +5719,7 @@ optional.
             Y = y.repeat(Nx, axis=1)
         if X.shape != Y.shape:
             raise TypeError(
-                'Incompatible X, Y inputs to %s; see help(%s)' % (
+                'Incompatible X, Y inputs to {}; see help({})'.format(
                 funcname, funcname))
         if allmatch:
             if (Nx, Ny) != (numCols, numRows):

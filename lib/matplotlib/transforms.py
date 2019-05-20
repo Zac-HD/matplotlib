@@ -51,7 +51,7 @@ def _indent_str(obj):  # textwrap.indent(str(obj), 4) on Py3.
     return re.sub("(^|\n)", r"\1    ", str(obj))
 
 
-class TransformNode(object):
+class TransformNode:
     """
     :class:`TransformNode` is the base class for anything that
     participates in the transform tree and needs to invalidate its
@@ -231,7 +231,7 @@ class TransformNode(object):
                 props['label'] = '"%s"' % label
                 props = ' '.join(map('{0[0]}={0[1]}'.format, props.items()))
 
-                fobj.write('%s [%s];\n' % (hash(root), props))
+                fobj.write('{} [{}];\n'.format(hash(root), props))
 
                 if hasattr(root, '_children'):
                     for child in root._children:

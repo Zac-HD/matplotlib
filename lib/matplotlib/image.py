@@ -364,7 +364,7 @@ class _ImageBase(martist.Artist, cm.ScalarMappable):
                     if A.dtype not in (np.float32, np.float16):
                         if A.dtype != np.float64:
                             cbook._warn_external("Casting input data from "
-                                                 "'{0}' to 'float64' for "
+                                                 "'{}' to 'float64' for "
                                                  "imshow".format(A.dtype))
                         scaled_dtype = np.float64
                 else:

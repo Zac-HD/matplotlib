@@ -179,13 +179,13 @@ class Tick(martist.Artist):
             cbook.deprecated(
                 "3.1",
                 name=_old_name,
-                alternative="Tick.{}.get_visible".format(_new_name))(
+                alternative=f"Tick.{_new_name}.get_visible")(
                     lambda self, _new_name=_new_name:
                         getattr(self, _new_name).get_visible()),
             cbook.deprecated(
                 "3.1",
                 name=_old_name,
-                alternative="Tick.{}.set_visible".format(_new_name))(
+                alternative=f"Tick.{_new_name}.set_visible")(
                     lambda self, value, _new_name=_new_name:
                         getattr(self, _new_name).set_visible(value)))
     del _old_name, _new_name
@@ -628,7 +628,7 @@ class YTick(Tick):
         return self.axes.viewLim.intervaly
 
 
-class Ticker(object):
+class Ticker:
     """
     A container for the objects defining tick position and format.
 
@@ -671,7 +671,7 @@ class Ticker(object):
         self._formatter = formatter
 
 
-class _LazyTickList(object):
+class _LazyTickList:
     """
     A descriptor for lazy instantiation of tick lists.
 

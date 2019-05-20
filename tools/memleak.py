@@ -38,8 +38,8 @@ def run_memleak_test(bench, iterations, report):
         nobjs = len(gc.get_objects())
         garbage = len(gc.garbage)
         open_files = len(p.open_files())
-        print("{0: 4d}: pymalloc {1: 10d}, rss {2: 10d}, nobjs {3: 10d}, "
-              "garbage {4: 4d}, files: {5: 4d}".format(
+        print("{: 4d}: pymalloc {: 10d}, rss {: 10d}, nobjs {: 10d}, "
+              "garbage {: 4d}, files: {: 4d}".format(
                   i, malloc, rss, nobjs, garbage, open_files))
 
         malloc_arr[i] = malloc
@@ -77,7 +77,7 @@ def run_memleak_test(bench, iterations, report):
     fig.savefig(report, format='pdf')
 
 
-class MemleakTest(object):
+class MemleakTest:
     def __init__(self, empty):
         self.empty = empty
 

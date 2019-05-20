@@ -315,7 +315,7 @@ _from_ordinalf_np_vectorized = np.vectorize(_from_ordinalf)
 
 @cbook.deprecated(
     "3.1", alternative="time.strptime or dateutil.parser.parse or datestr2num")
-class strpdate2num(object):
+class strpdate2num:
     """
     Use this class to parse date strings to matplotlib datenums when
     you know the date format string of the date you are parsing.
@@ -659,7 +659,7 @@ class DateFormatter(ticker.Formatter):
         # more accurate closer to year 0 (around the year 2000, precision
         # can be at 10s of microseconds).
         fmt = re.sub(r'((^|[^%])(%%)*)%f',
-                     r'\g<1>{0:06d}'.format(dt.microsecond), fmt)
+                     fr'\g<1>{dt.microsecond:06d}', fmt)
 
         year = dt.year
         # For every non-leap year century, advance by
@@ -685,13 +685,13 @@ class DateFormatter(ticker.Formatter):
         # http://en.cppreference.com/w/c/chrono/strftime.) For ease of
         # implementation, we always use padded zeros for %y, %Y, and %x.
         s1, s2 = self._replace_common_substr(s1, s2,
-                                             "{0:04d}".format(year1),
-                                             "{0:04d}".format(year2),
-                                             "{0:04d}".format(dt.year))
+                                             f"{year1:04d}",
+                                             f"{year2:04d}",
+                                             f"{dt.year:04d}")
         s1, s2 = self._replace_common_substr(s1, s2,
-                                             "{0:02d}".format(year1 % 100),
-                                             "{0:02d}".format(year2 % 100),
-                                             "{0:02d}".format(dt.year % 100))
+                                             "{:02d}".format(year1 % 100),
+                                             "{:02d}".format(year2 % 100),
+                                             "{:02d}".format(dt.year % 100))
         return cbook.unicode_safe(s1)
 
     @cbook.deprecated("3.0")
@@ -1042,12 +1042,12 @@ class AutoDateFormatter(ticker.Formatter):
         elif callable(fmt):
             result = fmt(x, pos)
         else:
-            raise TypeError('Unexpected type passed to {0!r}.'.format(self))
+            raise TypeError(f'Unexpected type passed to {self!r}.')
 
         return result
 
 
-class rrulewrapper(object):
+class rrulewrapper:
     def __init__(self, freq, tzinfo=None, **kwargs):
         kwargs['freq'] = freq
         self._base_tzinfo = tzinfo

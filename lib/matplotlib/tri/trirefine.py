@@ -7,7 +7,7 @@ from matplotlib.tri.triangulation import Triangulation
 import matplotlib.tri.triinterpolate
 
 
-class TriRefiner(object):
+class TriRefiner:
     """
     Abstract base class for classes implementing mesh refinement.
 
@@ -212,7 +212,7 @@ class UniformTriRefiner(TriRefiner):
             if np.shape(ancestors) != (ntri,):
                 raise ValueError(
                     "Incompatible shapes provide for triangulation"
-                    ".masked_triangles and ancestors: {0} and {1}".format(
+                    ".masked_triangles and ancestors: {} and {}".format(
                         np.shape(triangles), np.shape(ancestors)))
 
         # Initiating tables refi_x and refi_y of the refined triangulation

@@ -152,7 +152,7 @@ if __name__ == "__main__":
     milestone = opts.milestone
     project = opts.project
 
-    print("fetching GitHub stats since %s (tag: %s, milestone: %s)" % (since, tag, milestone), file=sys.stderr)
+    print(f"fetching GitHub stats since {since} (tag: {tag}, milestone: {milestone})", file=sys.stderr)
     if milestone:
         milestone_id = get_milestone_id(project=project, milestone=milestone,
                 auth=True)
@@ -182,7 +182,7 @@ if __name__ == "__main__":
     print()
     since_day = since.strftime("%Y/%m/%d")
     today = datetime.today().strftime("%Y/%m/%d")
-    print("GitHub stats for %s - %s (tag: %s)" % (since_day, today, tag))
+    print(f"GitHub stats for {since_day} - {today} (tag: {tag})")
     print()
     print("These lists are automatically generated, and may be incomplete or contain duplicates.")
     print()

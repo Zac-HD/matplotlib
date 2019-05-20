@@ -15,7 +15,7 @@ from matplotlib import _preprocess_data
 # this gets used in multiple tests, so define it here
 @_preprocess_data(replace_names=["x", "y"], label_namer="y")
 def plot_func(ax, x, y, ls="x", label=None, w="xyz"):
-    return ("x: %s, y: %s, ls: %s, w: %s, label: %s" % (
+    return ("x: {}, y: {}, ls: {}, w: {}, label: {}".format(
         list(x), list(y), ls, w, label))
 
 
@@ -136,7 +136,7 @@ def test_function_call_replace_all():
 
     @_preprocess_data(label_namer="y")
     def func_replace_all(ax, x, y, ls="x", label=None, w="NOT"):
-        return "x: %s, y: %s, ls: %s, w: %s, label: %s" % (
+        return "x: {}, y: {}, ls: {}, w: {}, label: {}".format(
             list(x), list(y), ls, w, label)
 
     assert (func_replace_all(None, "a", "b", w="x", data=data) ==
@@ -161,7 +161,7 @@ def test_no_label_replacements():
 
     @_preprocess_data(replace_names=["x", "y"], label_namer=None)
     def func_no_label(ax, x, y, ls="x", label=None, w="xyz"):
-        return "x: %s, y: %s, ls: %s, w: %s, label: %s" % (
+        return "x: {}, y: {}, ls: {}, w: {}, label: {}".format(
             list(x), list(y), ls, w, label)
 
     data = {"a": [1, 2], "b": [8, 9], "w": "NOT"}

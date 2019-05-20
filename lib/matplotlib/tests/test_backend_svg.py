@@ -73,7 +73,7 @@ def test_text_urls():
     buf = fd.read().decode()
     fd.close()
 
-    expected = '<a xlink:href="{0}">'.format(test_url)
+    expected = f'<a xlink:href="{test_url}">'
     assert expected in buf
 
 
@@ -192,8 +192,8 @@ def test_unicode_won():
         buf = fd.getvalue().decode('ascii')
 
     won_id = 'Computer_Modern_Sans_Serif-142'
-    assert re.search(r'<path d=(.|\s)*?id="{0}"/>'.format(won_id), buf)
-    assert re.search(r'<use[^/>]*? xlink:href="#{0}"/>'.format(won_id), buf)
+    assert re.search(fr'<path d=(.|\s)*?id="{won_id}"/>', buf)
+    assert re.search(fr'<use[^/>]*? xlink:href="#{won_id}"/>', buf)
 
 
 def test_svgnone_with_data_coordinates():

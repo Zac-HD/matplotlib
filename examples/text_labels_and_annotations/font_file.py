@@ -24,7 +24,7 @@ fig, ax = plt.subplots()
 fpath = os.path.join(rcParams["datapath"], "fonts/ttf/cmr10.ttf")
 prop = fm.FontProperties(fname=fpath)
 fname = os.path.split(fpath)[1]
-ax.set_title('This is a special font: {}'.format(fname), fontproperties=prop)
+ax.set_title(f'This is a special font: {fname}', fontproperties=prop)
 ax.set_xlabel('This is the default font')
 
 plt.show()

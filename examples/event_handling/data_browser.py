@@ -12,7 +12,7 @@ data of that point on the other axis.
 import numpy as np
 
 
-class PointBrowser(object):
+class PointBrowser:
     """
     Click on a point to select and highlight it -- the data that
     generated the point will be shown in the lower axes.  Use the 'n'
@@ -70,7 +70,7 @@ class PointBrowser(object):
         ax2.cla()
         ax2.plot(X[dataind])
 
-        ax2.text(0.05, 0.9, 'mu=%1.3f\nsigma=%1.3f' % (xs[dataind], ys[dataind]),
+        ax2.text(0.05, 0.9, 'mu={:1.3f}\nsigma={:1.3f}'.format(xs[dataind], ys[dataind]),
                  transform=ax2.transAxes, va='top')
         ax2.set_ylim(-0.5, 1.5)
         self.selected.set_visible(True)

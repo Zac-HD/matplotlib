@@ -157,7 +157,7 @@ elif QT_API is None:
     else:
         raise ImportError("Failed to import any qt binding")
 else:  # We should not get there.
-    raise AssertionError("Unexpected QT_API: {}".format(QT_API))
+    raise AssertionError(f"Unexpected QT_API: {QT_API}")
 
 
 # These globals are only defined for backcompatibility purposes.

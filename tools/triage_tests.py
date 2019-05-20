@@ -230,7 +230,7 @@ class Dialog(QtWidgets.QDialog):
             super().keyPressEvent(e)
 
 
-class Entry(object):
+class Entry:
     """
     A model for a single image comparison test.
     """
@@ -287,7 +287,7 @@ class Entry(object):
             path = self.source / baseline_dir / reldir
             if path.is_dir():
                 return path
-        raise ValueError("Can't find baseline dir for {}".format(reldir))
+        raise ValueError(f"Can't find baseline dir for {reldir}")
 
     @property
     def display(self):
@@ -302,7 +302,7 @@ class Entry(object):
             'autogen': '\N{WHITE SQUARE CONTAINING BLACK SMALL SQUARE}',
         }
         box = status_map[self.status]
-        return '{} {} [{}]'.format(box, self.name, self.extension)
+        return f'{box} {self.name} [{self.extension}]'
 
     def accept(self):
         """

@@ -156,7 +156,7 @@ def stack_hist(ax, stacked_data, sty_cycle, bottoms=None,
     arts = {}
     for j, (data, label, sty) in loop_iter:
         if label is None:
-            label = 'dflt set {n}'.format(n=j)
+            label = f'dflt set {j}'
         label = sty.pop('label', label)
         vals, edges = hist_func(data)
         if bottoms is None:
@@ -179,7 +179,7 @@ hist_func = partial(np.histogram, bins=edges)
 
 # set up style cycles
 color_cycle = cycler(facecolor=plt.rcParams['axes.prop_cycle'][:4])
-label_cycle = cycler(label=['set {n}'.format(n=n) for n in range(4)])
+label_cycle = cycler(label=[f'set {n}' for n in range(4)])
 hatch_cycle = cycler(hatch=['/', '*', '+', '|'])
 
 # Fixing random state for reproducibility

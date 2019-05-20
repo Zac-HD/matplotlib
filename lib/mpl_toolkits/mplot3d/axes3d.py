@@ -1186,7 +1186,7 @@ class Axes3D(Axes):
         xs = self.format_xdata(x)
         ys = self.format_ydata(y)
         zs = self.format_zdata(z)
-        return 'x=%s, y=%s, z=%s' % (xs, ys, zs)
+        return f'x={xs}, y={ys}, z={zs}'
 
     def _on_move(self, event):
         """Mouse moving
@@ -2853,7 +2853,7 @@ pivot='tail', normalize=False, **kwargs)
                         "filled".format(name))
                 return color
             else:
-                raise ValueError("Invalid {} argument".format(name))
+                raise ValueError(f"Invalid {name} argument")
 
         # broadcast and default on facecolors
         if facecolors is None:

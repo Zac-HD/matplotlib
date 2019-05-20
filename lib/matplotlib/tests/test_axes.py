@@ -1634,7 +1634,7 @@ def test_hist_step_filled():
 
     for kg, _type, ax in zip(kwargs, types, axs.flat):
         ax.hist(x, n_bins, histtype=_type, stacked=True, **kg)
-        ax.set_title('%s/%s' % (kg, _type))
+        ax.set_title(f'{kg}/{_type}')
         ax.set_ylim(bottom=-50)
 
     patches = axs[0, 0].patches
@@ -1785,7 +1785,7 @@ def test_hist2d_density_normed():
             obj.hist2d(x, y, density=True, normed=True)
 
 
-class TestScatter(object):
+class TestScatter:
     @image_comparison(['scatter'], style='mpl20', remove_text=True)
     def test_scatter_plot(self):
         data = {"x": np.array([3, 4, 2, 6]), "y": np.array([2, 5, 2, 3]),
@@ -2042,7 +2042,7 @@ def test_as_mpl_axes_api():
     from matplotlib.projections.polar import PolarAxes
     import matplotlib.axes as maxes
 
-    class Polar(object):
+    class Polar:
         def __init__(self):
             self.theta_offset = 0
 
@@ -4704,7 +4704,7 @@ def test_shared_with_aspect_3():
 def test_twin_with_aspect(twin):
     fig, ax = plt.subplots()
     # test twinx or twiny
-    ax_twin = getattr(ax, 'twin{}'.format(twin))()
+    ax_twin = getattr(ax, f'twin{twin}')()
     ax.set_aspect(5)
     ax_twin.set_aspect(2)
     assert_array_equal(ax.bbox.extents,
@@ -5769,12 +5769,12 @@ def test_fillbetween_cycle():
 
     for j in range(3):
         cc = ax.fill_between(range(3), range(3))
-        target = mcolors.to_rgba('C{}'.format(j))
+        target = mcolors.to_rgba(f'C{j}')
         assert tuple(cc.get_facecolors().squeeze()) == tuple(target)
 
     for j in range(3, 6):
         cc = ax.fill_betweenx(range(3), range(3))
-        target = mcolors.to_rgba('C{}'.format(j))
+        target = mcolors.to_rgba(f'C{j}')
         assert tuple(cc.get_facecolors().squeeze()) == tuple(target)
 
     target = mcolors.to_rgba('k')
@@ -5786,7 +5786,7 @@ def test_fillbetween_cycle():
     edge_target = mcolors.to_rgba('k')
     for j, el in enumerate(['edgecolor', 'edgecolors'], start=6):
         cc = ax.fill_between(range(3), range(3), **{el: 'k'})
-        face_target = mcolors.to_rgba('C{}'.format(j))
+        face_target = mcolors.to_rgba(f'C{j}')
         assert tuple(cc.get_facecolors().squeeze()) == tuple(face_target)
         assert tuple(cc.get_edgecolors().squeeze()) == tuple(edge_target)
 

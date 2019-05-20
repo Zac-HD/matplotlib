@@ -360,7 +360,7 @@ def test_constrained_layout23():
 
     for i in range(2):
         fig, ax = plt.subplots(num="123", constrained_layout=True, clear=True)
-        fig.suptitle("Suptitle{}".format(i))
+        fig.suptitle(f"Suptitle{i}")
 
 
 # This test occasionally fails the image comparison tests, so we mark as

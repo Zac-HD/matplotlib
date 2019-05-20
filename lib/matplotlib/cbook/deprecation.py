@@ -30,7 +30,7 @@ def _generate_deprecation_warning(
                 "A pending deprecation cannot have a scheduled removal")
     else:
         if removal:
-            removal = "in {}".format(removal)
+            removal = f"in {removal}"
         else:
             removal = {"2.2": "in 3.1", "3.0": "in 3.2", "3.1": "in 3.3"}.get(
                 since, "two minor releases later")

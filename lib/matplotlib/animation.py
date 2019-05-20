@@ -93,7 +93,7 @@ def adjusted_figsize(w, h, dpi, n):
 
 
 # A registry for available MovieWriter classes
-class MovieWriterRegistry(object):
+class MovieWriterRegistry:
     '''Registry of available writer classes by human readable name.'''
     def __init__(self):
         self.avail = dict()
@@ -159,7 +159,7 @@ class MovieWriterRegistry(object):
             return self.avail[name]
         except KeyError:
             raise RuntimeError(
-                'Requested MovieWriter ({}) not available'.format(name))
+                f'Requested MovieWriter ({name}) not available')
 
 
 writers = MovieWriterRegistry()
@@ -576,7 +576,7 @@ class PillowWriter(MovieWriter):
 
 # Base class of ffmpeg information. Has the config keys and the common set
 # of arguments that controls the *output* side of things.
-class FFMpegBase(object):
+class FFMpegBase:
     '''Mixin class for FFMpeg output.
 
     To be useful this must be multiply-inherited from with a
@@ -602,7 +602,7 @@ class FFMpegBase(object):
         if self.extra_args:
             args.extend(self.extra_args)
         for k, v in self.metadata.items():
-            args.extend(['-metadata', '%s=%s' % (k, v)])
+            args.extend(['-metadata', f'{k}={v}'])
 
         return args + ['-y', self.outfile]
 
@@ -696,7 +696,7 @@ class AVConvFileWriter(AVConvBase, FFMpegFileWriter):
 
 
 # Base class for animated GIFs with ImageMagick
-class ImageMagickBase(object):
+class ImageMagickBase:
     '''Mixin class for ImageMagick output.
 
     To be useful this must be multiply-inherited from with a
@@ -761,7 +761,7 @@ class ImageMagickFileWriter(ImageMagickBase, FileMovieWriter):
 
     def _args(self):
         return ([self.bin_path(), '-delay', str(self.delay), '-loop', '0',
-                 '%s*.%s' % (self.temp_prefix, self.frame_format)]
+                 f'{self.temp_prefix}*.{self.frame_format}']
                 + self.output_args)
 
 
@@ -808,7 +808,7 @@ class HTMLWriter(FileMovieWriter):
 
         if self.default_mode not in ['loop', 'once', 'reflect']:
             raise ValueError(
-                "unrecognized default_mode {!r}".format(self.default_mode))
+                f"unrecognized default_mode {self.default_mode!r}")
 
         super().__init__(fps, codec, bitrate, extra_args, metadata)
 
@@ -880,7 +880,7 @@ class HTMLWriter(FileMovieWriter):
                                              **mode_dict))
 
 
-class Animation(object):
+class Animation:
     '''This class wraps the creation of an animation using matplotlib.
 
     It is only a base class which should be subclassed to provide

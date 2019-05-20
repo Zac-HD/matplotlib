@@ -12,7 +12,7 @@ from matplotlib.tri.tritools import TriAnalyzer
 __all__ = ('TriInterpolator', 'LinearTriInterpolator', 'CubicTriInterpolator')
 
 
-class TriInterpolator(object):
+class TriInterpolator:
     """
     Abstract base class for classes used to perform interpolation on
     triangular grids.
@@ -163,7 +163,7 @@ class TriInterpolator(object):
         sh_ret = x.shape
         if x.shape != y.shape:
             raise ValueError("x and y shall have same shapes."
-                             " Given: {0} and {1}".format(x.shape, y.shape))
+                             " Given: {} and {}".format(x.shape, y.shape))
         x = np.ravel(x)
         y = np.ravel(y)
         x_scaled = x/self._unit_x
@@ -178,7 +178,7 @@ class TriInterpolator(object):
                 raise ValueError(
                     "tri_index array is provided and shall"
                     " have same shape as x and y. Given: "
-                    "{0} and {1}".format(tri_index.shape, sh_ret))
+                    "{} and {}".format(tri_index.shape, sh_ret))
             tri_index = np.ravel(tri_index)
 
         mask_in = (tri_index != -1)
@@ -484,7 +484,7 @@ class CubicTriInterpolator(TriInterpolator):
         elif kind == 'min_E':
             TE = _DOF_estimator_min_E(self)
         else:
-            raise ValueError("CubicTriInterpolator *kind* proposed: {0}; "
+            raise ValueError("CubicTriInterpolator *kind* proposed: {}; "
                              "should be one of: "
                              "'user', 'geom', 'min_E'".format(kind))
         return TE.compute_dof_from_df()
@@ -1230,7 +1230,7 @@ class _DOF_estimator_min_E(_DOF_estimator_geom):
 
 # The following private :class:_Sparse_Matrix_coo and :func:_cg provide
 # a PCG sparse solver for (symmetric) elliptic problems.
-class _Sparse_Matrix_coo(object):
+class _Sparse_Matrix_coo:
     def __init__(self, vals, rows, cols, shape):
         """
         Creates a sparse matrix in coo format

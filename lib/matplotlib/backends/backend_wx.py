@@ -57,7 +57,7 @@ def debug_on_error(type, value, tb):
 
 
 @cbook.deprecated("3.1")
-class fake_stderr(object):
+class fake_stderr:
     """
     Wx does strange things with stderr, as it makes the assumption that
     there is probably no console. This redirects stderr to the console, since
@@ -693,7 +693,7 @@ class _FigureCanvasWxBase(FigureCanvasBase, wx.Panel):
         for i, (name, exts) in enumerate(sorted_filetypes):
             ext_list = ';'.join(['*.%s' % ext for ext in exts])
             extensions.append(exts[0])
-            wildcard = '%s (%s)|%s' % (name, ext_list, ext_list)
+            wildcard = f'{name} ({ext_list})|{ext_list}'
             if default_filetype in exts:
                 filter_index = i
             wildcards.append(wildcard)
@@ -817,7 +817,7 @@ class _FigureCanvasWxBase(FigureCanvasBase, wx.Panel):
                 [evt.AltDown, 'alt'],
                 [evt.ControlDown, 'ctrl'], ):
             if meth():
-                key = '{0}+{1}'.format(prefix, key)
+                key = f'{prefix}+{key}'
 
         return key
 

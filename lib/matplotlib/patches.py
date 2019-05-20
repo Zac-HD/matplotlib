@@ -423,8 +423,8 @@ class Patch(artist.Artist):
         """
         s = s.lower()
         if s not in self.validCap:
-            raise ValueError('set_capstyle passed "%s";\n' % (s,) +
-                             'valid capstyles are %s' % (self.validCap,))
+            raise ValueError(f'set_capstyle passed "{s}";\n' +
+                             f'valid capstyles are {self.validCap}')
         self._capstyle = s
         self.stale = True
 
@@ -442,8 +442,8 @@ class Patch(artist.Artist):
         """
         s = s.lower()
         if s not in self.validJoin:
-            raise ValueError('set_joinstyle passed "%s";\n' % (s,) +
-                             'valid joinstyles are %s' % (self.validJoin,))
+            raise ValueError(f'set_joinstyle passed "{s}";\n' +
+                             f'valid joinstyles are {self.validJoin}')
         self._joinstyle = s
         self.stale = True
 
@@ -1885,7 +1885,7 @@ def _simpleprint_styles(_styles):
     return "[{}]".format("|".join(map(" '{}' ".format, sorted(_styles))))
 
 
-class _Style(object):
+class _Style:
     """
     A base class for the Styles. It is meant to be a container class,
     where actual styles are declared as subclass of it, and it
@@ -1936,7 +1936,7 @@ class _Style(object):
         """
 
         if not issubclass(style, cls._Base):
-            raise ValueError("%s must be a subclass of %s" % (style,
+            raise ValueError("{} must be a subclass of {}".format(style,
                                                               cls._Base))
         cls._style_list[name] = style
 
@@ -1985,7 +1985,7 @@ class BoxStyle(_Style):
 
     _style_list = {}
 
-    class _Base(object):
+    class _Base:
         """
         :class:`BBoxTransmuterBase` and its derivatives are used to make a
         fancy box around a given rectangle. The :meth:`__call__` method
@@ -2727,7 +2727,7 @@ class ConnectionStyle(_Style):
 
     _style_list = {}
 
-    class _Base(object):
+    class _Base:
         """
         A base class for connectionstyle classes. The subclass needs
         to implement a *connect* method whose call signature is::
@@ -3170,7 +3170,7 @@ class ArrowStyle(_Style):
 
     _style_list = {}
 
-    class _Base(object):
+    class _Base:
         """
         Arrow Transmuter Base class
 
@@ -3930,10 +3930,10 @@ class FancyArrowPatch(Patch):
         if self._posA_posB is not None:
             (x1, y1), (x2, y2) = self._posA_posB
             return self.__class__.__name__ \
-                + "((%g, %g)->(%g, %g))" % (x1, y1, x2, y2)
+                + f"(({x1:g}, {y1:g})->({x2:g}, {y2:g}))"
         else:
             return self.__class__.__name__ \
-                + "(%s)" % (str(self._path_original),)
+                + "({})".format(str(self._path_original))
 
     @docstring.dedent_interpd
     def __init__(self, posA=None, posB=None,

@@ -6,7 +6,7 @@ import datetime as DT
 from matplotlib.dates import date2num
 
 
-class Epoch(object):
+class Epoch:
     # Frame conversion offsets in seconds
     # t(TO) = t(FROM) + allowed[ FROM ][ TO ]
     allowed = {
@@ -193,7 +193,7 @@ class Epoch(object):
 
     def __str__(self):
         """Print the Epoch."""
-        return "%22.15e %s" % (self.julianDate(self._frame), self._frame)
+        return "{:22.15e} {}".format(self.julianDate(self._frame), self._frame)
 
     def __repr__(self):
         """Print the Epoch."""

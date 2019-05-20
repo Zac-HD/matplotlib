@@ -762,7 +762,7 @@ def table(ax,
 
     if cellColours is not None:
         if len(cellColours) != rows:
-            raise ValueError("'cellColours' must have {} rows".format(rows))
+            raise ValueError(f"'cellColours' must have {rows} rows")
         for row in cellColours:
             if len(row) != cols:
                 raise ValueError("Each row in 'cellColours' must have {} "
@@ -786,7 +786,7 @@ def table(ax,
 
     if rowLabels is not None:
         if len(rowLabels) != rows:
-            raise ValueError("'rowLabels' must be of length {0}".format(rows))
+            raise ValueError(f"'rowLabels' must be of length {rows}")
 
     # If we have column labels, need to shift
     # the text and colour arrays down 1 row

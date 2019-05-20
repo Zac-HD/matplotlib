@@ -235,12 +235,12 @@ class FigureCanvasWebAggCore(backend_agg.FigureCanvasAgg):
 
     def handle_event(self, event):
         e_type = event['type']
-        handler = getattr(self, 'handle_{0}'.format(e_type),
+        handler = getattr(self, f'handle_{e_type}',
                           self.handle_unknown_event)
         return handler(event)
 
     def handle_unknown_event(self, event):
-        _log.warning('Unhandled message type {0}. {1}'.format(
+        _log.warning('Unhandled message type {}. {}'.format(
                      event['type'], event))
 
     def handle_ack(self, event):
@@ -307,7 +307,7 @@ class FigureCanvasWebAggCore(backend_agg.FigureCanvasAgg):
     def handle_refresh(self, event):
         figure_label = self.figure.get_label()
         if not figure_label:
-            figure_label = "Figure {0}".format(self.manager.num)
+            figure_label = f"Figure {self.manager.num}"
         self.send_event('figure_label', label=figure_label)
         self._force_full = True
         self.draw_idle()
@@ -461,7 +461,7 @@ class FigureManagerWebAgg(backend_bases.FigureManagerBase):
                 toolitems.append(['', '', '', ''])
             else:
                 toolitems.append([name, tooltip, image, method])
-        output.write("mpl.toolbar_items = {0};\n\n".format(
+        output.write("mpl.toolbar_items = {};\n\n".format(
             json.dumps(toolitems)))
 
         extensions = []
@@ -470,10 +470,10 @@ class FigureManagerWebAgg(backend_bases.FigureManagerBase):
                                     items()):
             if not ext[0] == 'pgf':  # pgf does not support BytesIO
                 extensions.append(ext[0])
-        output.write("mpl.extensions = {0};\n\n".format(
+        output.write("mpl.extensions = {};\n\n".format(
             json.dumps(extensions)))
 
-        output.write("mpl.default_extension = {0};".format(
+        output.write("mpl.default_extension = {};".format(
             json.dumps(FigureCanvasWebAggCore.get_default_filetype())))
 
         if stream is None:

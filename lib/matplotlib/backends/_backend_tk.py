@@ -190,7 +190,7 @@ class FigureCanvasTk(FigureCanvasBase):
        keys on apple keyboards."""
 
     def __init__(self, figure, master=None, resize_callback=None):
-        super(FigureCanvasTk, self).__init__(figure)
+        super().__init__(figure)
         self._idle = True
         self._idle_callback = None
         t1, t2, w, h = self.figure.bbox.bounds
@@ -381,7 +381,7 @@ class FigureCanvasTk(FigureCanvasBase):
             # shift is not added to the keys as this is already accounted for
             for bitmask, prefix, key_name in modifiers:
                 if event.state & (1 << bitmask) and key_name not in key:
-                    key = '{0}+{1}'.format(prefix, key)
+                    key = f'{prefix}+{key}'
 
         return key
 
@@ -647,7 +647,7 @@ class NavigationToolbar2Tk(NavigationToolbar2, tk.Frame):
             NavigationToolbar2.update(self)
 
 
-class ToolTip(object):
+class ToolTip:
     """
     Tooltip recipe from
     http://www.voidspace.org.uk/python/weblog/arch_d7_2006_07_01.shtml#e387

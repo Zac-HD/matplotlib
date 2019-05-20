@@ -43,7 +43,7 @@ for ax, label in zip(axs.flat, ['I', 'II', 'III', 'IV']):
 # verify the stats
 pairs = (x, y1), (x, y2), (x, y3), (x4, y4)
 for x, y in pairs:
-    print('mean=%1.2f, std=%1.2f, r=%1.2f' % (np.mean(y), np.std(y),
+    print('mean={:1.2f}, std={:1.2f}, r={:1.2f}'.format(np.mean(y), np.std(y),
           np.corrcoef(x, y)[0][1]))
 
 plt.show()

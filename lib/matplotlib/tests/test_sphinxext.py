@@ -20,7 +20,7 @@ def test_tinypages(tmpdir):
     proc = Popen(cmd, stdout=PIPE, stderr=PIPE, universal_newlines=True)
     out, err = proc.communicate()
     assert proc.returncode == 0, \
-        "sphinx build failed with stdout:\n{}\nstderr:\n{}\n".format(out, err)
+        f"sphinx build failed with stdout:\n{out}\nstderr:\n{err}\n"
     if err:
         pytest.fail("sphinx build emitted the following warnings:\n{}"
                     .format(err))
@@ -28,7 +28,7 @@ def test_tinypages(tmpdir):
     assert isdir(html_dir)
 
     def plot_file(num):
-        return pjoin(html_dir, 'some_plots-{0}.png'.format(num))
+        return pjoin(html_dir, f'some_plots-{num}.png')
 
     range_10, range_6, range_4 = [plot_file(i) for i in range(1, 4)]
     # Plot 5 is range(6) plot

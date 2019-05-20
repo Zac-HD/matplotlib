@@ -21,11 +21,11 @@ def check_results_are_compatible(results_a, results_b):
     a_minus_b = {*results_a} - {*results_b}
     if a_minus_b:
         raise RuntimeError(
-            "Backends {} in first set, but not in second".format(a_minus_b))
+            f"Backends {a_minus_b} in first set, but not in second")
     b_minus_a = {*results_b} - {*results_a}
     if b_minus_a:
         raise RuntimeError(
-            "Backends {} in second set, but not in first".format(b_minus_a))
+            f"Backends {b_minus_a} in second set, but not in first")
 
 
 def compare_results(results_a, results_b):
@@ -35,7 +35,7 @@ def compare_results(results_a, results_b):
     sections.sort()
     for section in results_a.keys():
         print("backend %s" % section)
-        print("    %-40s %6s %6s %6s %6s" % ("test", "a", "b", "delta", "% diff"))
+        print("    {:<40} {:>6} {:>6} {:>6} {:>6}".format("test", "a", "b", "delta", "% diff"))
         print("    " + '-' * 69)
         deltas = []
         section_a = results_a[section]
@@ -55,9 +55,9 @@ def compare_results(results_a, results_b):
         for diff, delta, time_a, time_b, test in deltas:
             if diff is None:
                 if time_a is None:
-                    print("    %-40s    ??? % 6.3f    ???    ???" % (test, time_b))
+                    print(f"    {test:<40}    ??? {time_b: 6.3f}    ???    ???")
                 else:
-                    print("    %-40s % 6.3f    ???    ???    ???" % (test, time_a))
+                    print(f"    {test:<40} {time_a: 6.3f}    ???    ???    ???")
             else:
                 print("    %-40s % 6.3f % 6.3f % 6.3f %6d%%" % (test, time_a, time_b, delta, diff * 100))
 

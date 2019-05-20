@@ -46,7 +46,7 @@ def _remove_blacklisted_style_params(d, warn=True):
         if key in STYLE_BLACKLIST:
             if warn:
                 cbook._warn_external(
-                    "Style includes a parameter, '{0}', that is not related "
+                    "Style includes a parameter, '{}', that is not related "
                     "to style.  Ignoring".format(key))
         else:
             o[key] = val
@@ -188,7 +188,7 @@ def read_style_directory(style_dir):
                                                use_default_template=False)
 
         for w in warns:
-            message = 'In %s: %s' % (path, w.message)
+            message = f'In {path}: {w.message}'
             _log.warning(message)
 
     return styles

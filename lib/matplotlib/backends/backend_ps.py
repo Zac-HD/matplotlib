@@ -42,7 +42,7 @@ backend_version = 'Level II'
 debugPS = 0
 
 
-class PsBackendHelper(object):
+class PsBackendHelper:
 
     def __init__(self):
         self._cached = {}
@@ -243,7 +243,7 @@ class RendererPS(_backend_pdf_ps.RendererPDFPSBase):
                 self._pswriter.write("%1.3f setgray\n" % r)
             else:
                 self._pswriter.write(
-                    "%1.3f %1.3f %1.3f setrgbcolor\n" % (r, g, b))
+                    f"{r:1.3f} {g:1.3f} {b:1.3f} setrgbcolor\n")
             if store:
                 self.color = (r, g, b)
 
@@ -465,7 +465,7 @@ grestore
                 simplify=False):
             if len(vertices):
                 x, y = vertices[-2:]
-                ps_cmd.append("%g %g o" % (x, y))
+                ps_cmd.append(f"{x:g} {y:g} o")
 
         ps = '\n'.join(ps_cmd)
         self._draw_ps(ps, gc, rgbFace, fill=False, stroke=False)
@@ -496,7 +496,7 @@ grestore
         path_codes = []
         for i, (path, transform) in enumerate(self._iter_collection_raw_paths(
                 master_transform, paths, all_transforms)):
-            name = 'p%x_%x' % (self._path_collection_id, i)
+            name = f'p{self._path_collection_id:x}_{i:x}'
             ps_cmd = ['/%s {' % name,
                       'newpath', 'translate']
             ps_cmd.append(self._convert_path(path, transform, simplify=False))
@@ -508,7 +508,7 @@ grestore
                 gc, master_transform, all_transforms, path_codes, offsets,
                 offsetTrans, facecolors, edgecolors, linewidths, linestyles,
                 antialiaseds, urls, offset_position):
-            ps = "%g %g %s" % (xo, yo, path_id)
+            ps = f"{xo:g} {yo:g} {path_id}"
             self._draw_ps(ps, gc0, rgbFace)
 
         self._path_collection_id += 1
@@ -595,7 +595,7 @@ grestore
                 last_name = name
                 thisx += kern * scale
 
-                lines.append('%f %f m /%s glyphshow' % (thisx, thisy, name))
+                lines.append(f'{thisx:f} {thisy:f} m /{name} glyphshow')
 
                 thisx += width * scale
 
@@ -644,7 +644,7 @@ grestore
                 lastgind = gind
                 thisx += kern / 64
 
-                lines.append('%f %f m /%s glyphshow' % (thisx, thisy, name))
+                lines.append(f'{thisx:f} {thisy:f} m /{name} glyphshow')
                 thisx += glyph.linearHoriAdvance / 65536
 
             thetext = '\n'.join(lines)
@@ -763,7 +763,7 @@ grestore
         cliprect = gc.get_clip_rectangle()
         if cliprect:
             x, y, w, h = cliprect.bounds
-            write('%1.4g %1.4g %1.4g %1.4g clipbox\n' % (w, h, x, y))
+            write(f'{w:1.4g} {h:1.4g} {x:1.4g} {y:1.4g} clipbox\n')
         clippath, clippath_trans = gc.get_clip_path()
         if clippath:
             id = self._get_clip_path(clippath, clippath_trans)
@@ -950,7 +950,7 @@ class FigureCanvasPS(FigureCanvasBase):
         self.figure.set_edgecolor(edgecolor)
 
         if dryrun:
-            class NullWriter(object):
+            class NullWriter:
                 def write(self, *args, **kwargs):
                     pass
 
@@ -1148,7 +1148,7 @@ class FigureCanvasPS(FigureCanvasBase):
         self.figure.set_edgecolor(edgecolor)
 
         if dryrun:
-            class NullWriter(object):
+            class NullWriter:
                 def write(self, *args, **kwargs):
                     pass
 
@@ -1440,11 +1440,11 @@ def get_bbox_header(lbrt, rotated=False):
 
     l, b, r, t = lbrt
     if rotated:
-        rotate = "%.2f %.2f translate\n90 rotate" % (l+r, 0)
+        rotate = "{:.2f} {:.2f} translate\n90 rotate".format(l+r, 0)
     else:
         rotate = ""
     bbox_info = '%%%%BoundingBox: %d %d %d %d' % (l, b, np.ceil(r), np.ceil(t))
-    hires_bbox_info = '%%%%HiResBoundingBox: %.6f %.6f %.6f %.6f' % (
+    hires_bbox_info = '%%HiResBoundingBox: {:.6f} {:.6f} {:.6f} {:.6f}'.format(
         l, b, r, t)
 
     return '\n'.join([bbox_info, hires_bbox_info]), rotate
@@ -1493,7 +1493,7 @@ def get_bbox(tmpfile, bbox):
         l, b, r, t = (x-dx, y-dy, x+dx, y+dy)
 
     bbox_info = '%%%%BoundingBox: %d %d %d %d' % (l, b, np.ceil(r), np.ceil(t))
-    hires_bbox_info = '%%%%HiResBoundingBox: %.6f %.6f %.6f %.6f' % (
+    hires_bbox_info = '%%HiResBoundingBox: {:.6f} {:.6f} {:.6f} {:.6f}'.format(
         l, b, r, t)
 
     return '\n'.join([bbox_info, hires_bbox_info])

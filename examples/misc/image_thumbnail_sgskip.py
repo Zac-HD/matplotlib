@@ -33,4 +33,4 @@ for fname in glob.glob(os.path.join(indir, '*.png')):
     basedir, basename = os.path.split(fname)
     outfile = os.path.join(outdir, basename)
     fig = image.thumbnail(fname, outfile, scale=0.15)
-    print('saved thumbnail of %s to %s' % (fname, outfile))
+    print(f'saved thumbnail of {fname} to {outfile}')

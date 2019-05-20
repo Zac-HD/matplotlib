@@ -18,12 +18,12 @@ class UnitDblFormatter(ticker.ScalarFormatter):
         if len(self.locs) == 0:
             return ''
         else:
-            return '{:.12}'.format(x)
+            return f'{x:.12}'
 
     def format_data_short(self, value):
         "Return the value formatted in 'short' format."
-        return '{:.12}'.format(value)
+        return f'{value:.12}'
 
     def format_data(self, value):
         "Return the value formatted into a string."
-        return '{:.12}'.format(value)
+        return f'{value:.12}'

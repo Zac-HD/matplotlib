@@ -19,7 +19,7 @@ def check_shared(axs, x_shared, y_shared):
         if i2 <= i1:
             continue
         assert \
-            (getattr(axs[0], "_shared_{}_axes".format(name)).joined(ax1, ax2)
+            (getattr(axs[0], f"_shared_{name}_axes").joined(ax1, ax2)
              == shared[i1, i2]), \
             "axes %i and %i incorrectly %ssharing %s axis" % (
                 i1, i2, "not " if shared[i1, i2] else "", name)

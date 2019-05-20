@@ -18,7 +18,7 @@ from . import _path, cbook, rcParams
 from .cbook import _to_unmasked_float_array, simple_linear_interpolation
 
 
-class Path(object):
+class Path:
     """
     A series of possibly disconnected, possibly closed, line and curve
     segments.
@@ -346,7 +346,7 @@ class Path(object):
         return cls(vertices, codes)
 
     def __repr__(self):
-        return "Path(%r, %r)" % (self.vertices, self.codes)
+        return f"Path({self.vertices!r}, {self.codes!r})"
 
     def __len__(self):
         return len(self.vertices)

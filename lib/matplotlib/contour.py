@@ -45,7 +45,7 @@ class ClabelText(text.Text):
         return new_angle
 
 
-class ContourLabeler(object):
+class ContourLabeler:
     """Mixin to provide labelling capability to `.ContourSet`."""
 
     def clabel(self, levels=None, *,
@@ -1546,11 +1546,11 @@ class QuadContourSet(ContourSet):
 
             if x.shape != z.shape:
                 raise TypeError("Shape of x does not match that of z: found "
-                                "{0} instead of {1}.".format(x.shape, z.shape))
+                                "{} instead of {}.".format(x.shape, z.shape))
 
             if y.shape != z.shape:
                 raise TypeError("Shape of y does not match that of z: found "
-                                "{0} instead of {1}.".format(y.shape, z.shape))
+                                "{} instead of {}.".format(y.shape, z.shape))
         else:
             raise TypeError("Inputs x and y must be 1D or 2D.")
 

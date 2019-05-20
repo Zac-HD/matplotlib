@@ -42,7 +42,7 @@ non_interactive_bk = ['agg', 'cairo',
 all_backends = interactive_bk + non_interactive_bk
 
 
-class ValidateInStrings(object):
+class ValidateInStrings:
     def __init__(self, key, valid, ignorecase=False):
         'valid is a list of legal strings'
         self.key = key
@@ -93,7 +93,7 @@ def _listify_validator(scalar_validator, allow_stringlist=False):
             raise ValueError("{!r} must be of type: string or non-dictionary "
                              "iterable".format(s))
     try:
-        f.__name__ = "{}list".format(scalar_validator.__name__)
+        f.__name__ = f"{scalar_validator.__name__}list"
     except AttributeError:  # class instance.
         f.__name__ = "{}List".format(type(scalar_validator).__name__)
     f.__doc__ = scalar_validator.__doc__
@@ -296,7 +296,7 @@ _str_err_msg = ('You must supply exactly {n} comma-separated values, you '
                 'provided {num} comma-separated values: {s}')
 
 
-class validate_nseq_float(object):
+class validate_nseq_float:
     def __init__(self, n=None, allow_none=False):
         self.n = n
         self.allow_none = allow_none
@@ -321,7 +321,7 @@ class validate_nseq_float(object):
             raise ValueError('Could not convert all entries to floats')
 
 
-class validate_nseq_int(object):
+class validate_nseq_int:
     def __init__(self, n=None):
         self.n = n
 
@@ -406,7 +406,7 @@ def validate_color(s):
     if not msg and is_color_like(colorarg):
         return colorarg
 
-    raise ValueError('%s does not look like a color arg%s' % (s, msg))
+    raise ValueError(f'{s} does not look like a color arg{msg}')
 
 
 validate_colorlist = _listify_validator(validate_color, allow_stringlist=True)
@@ -691,7 +691,7 @@ def validate_sketch(s):
     return result
 
 
-class ValidateInterval(object):
+class ValidateInterval:
     """
     Value must be in interval
     """
@@ -905,11 +905,11 @@ def validate_cycler(s):
     for prop in cycler_inst.keys:
         norm_prop = _prop_aliases.get(prop, prop)
         if norm_prop != prop and norm_prop in cycler_inst.keys:
-            raise ValueError("Cannot specify both '{0}' and alias '{1}'"
+            raise ValueError("Cannot specify both '{}' and alias '{}'"
                              " in the same prop_cycle".format(norm_prop, prop))
         if norm_prop in checker:
-            raise ValueError("Another property was already aliased to '{0}'."
-                             " Collision normalizing '{1}'.".format(norm_prop,
+            raise ValueError("Another property was already aliased to '{}'."
+                             " Collision normalizing '{}'.".format(norm_prop,
                                                                     prop))
         checker.update([norm_prop])
 

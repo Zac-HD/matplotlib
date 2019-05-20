@@ -60,7 +60,7 @@ def format_score(scr, test):
     """
     md = testMeta[test]
     if md:
-        return '{0}\n{1}'.format(scr, md)
+        return f'{scr}\n{md}'
     else:
         return scr
 

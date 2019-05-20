@@ -33,7 +33,7 @@ from gi.repository import GLib, GObject, Gtk, Gdk
 
 _log = logging.getLogger(__name__)
 
-backend_version = "%s.%s.%s" % (
+backend_version = "{}.{}.{}".format(
     Gtk.get_major_version(), Gtk.get_micro_version(), Gtk.get_minor_version())
 
 # the true dots per inch on the screen; should be display dependent
@@ -274,7 +274,7 @@ class FigureCanvasGTK3(Gtk.DrawingArea, FigureCanvasBase):
                     ]
         for key_mask, prefix in modifiers:
             if event.state & key_mask:
-                key = '{0}+{1}'.format(prefix, key)
+                key = f'{prefix}+{key}'
 
         return key
 
@@ -657,7 +657,7 @@ class FileChooserDialog(Gtk.FileChooserDialog):
         sorted_filetypes = sorted(filetypes.items())
         default = 0
         for i, (ext, name) in enumerate(sorted_filetypes):
-            liststore.append(["%s (*.%s)" % (name, ext)])
+            liststore.append([f"{name} (*.{ext})"])
             if ext == default_filetype:
                 default = i
         cbox.set_active(default)

@@ -675,7 +675,7 @@ class RendererPgf(RendererBase):
         # prepare string for tex
         s = common_texification(s)
         prop_cmds = _font_properties_str(prop)
-        s = r"%s %s" % (prop_cmds, s)
+        s = fr"{prop_cmds} {s}"
 
         writeln(self.fh, r"\begin{pgfscope}")
 
@@ -767,7 +767,7 @@ class TmpDirCleaner:
     @staticmethod
     def cleanup_remaining_tmpdirs():
         for tmpdir in TmpDirCleaner.remaining_tmpdirs:
-            error_message = "error deleting tmp directory {}".format(tmpdir)
+            error_message = f"error deleting tmp directory {tmpdir}"
             shutil.rmtree(
                 tmpdir,
                 onerror=lambda *args: _log.error(error_message))
@@ -1039,7 +1039,7 @@ class PdfPages:
         for k, v in infoDict.items():
             if k not in supported_keys:
                 raise ValueError(
-                    'Not a supported pdf metadata field: "{}"'.format(k)
+                    f'Not a supported pdf metadata field: "{k}"'
                 )
             hyperref_options += 'pdf' + k + '={' + str(v) + '},'
 
@@ -1126,7 +1126,7 @@ class PdfPages:
             else:
                 manager = Gcf.get_fig_manager(figure)
             if manager is None:
-                raise ValueError("No figure {}".format(figure))
+                raise ValueError(f"No figure {figure}")
             figure = manager.canvas.figure
 
         try:

@@ -28,7 +28,7 @@ def make_test_filename(fname, purpose):
     extension.
     """
     base, ext = os.path.splitext(fname)
-    return '%s-%s%s' % (base, purpose, ext)
+    return f'{base}-{purpose}{ext}'
 
 
 @cbook.deprecated("3.0")
@@ -139,7 +139,7 @@ class _ConverterError(Exception):
     pass
 
 
-class _Converter(object):
+class _Converter:
     def __init__(self):
         self._proc = None
         # Explicitly register deletion from an atexit handler because if we

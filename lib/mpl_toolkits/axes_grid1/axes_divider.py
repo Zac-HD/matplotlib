@@ -17,7 +17,7 @@ import matplotlib.transforms as mtransforms
 from . import axes_size as Size
 
 
-class Divider(object):
+class Divider:
     """
     This class calculates the axes position. It
     divides the given rectangular area into several
@@ -295,7 +295,7 @@ class Divider(object):
             self.append_size(d, padded_size)
 
 
-class AxesLocator(object):
+class AxesLocator:
     """
     A simple callable object, initialized with AxesDivider class,
     returns the position and size of the given cell.
@@ -858,7 +858,7 @@ class VBoxDivider(HBoxDivider):
                   addendum=' There is no alternative. Deriving from '
                            'matplotlib.axes.Axes provides this functionality '
                            'already.')
-class LocatableAxesBase(object):
+class LocatableAxesBase:
     pass
 
 

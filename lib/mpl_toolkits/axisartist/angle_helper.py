@@ -155,7 +155,7 @@ def select_step360(v1, v2, nv, include_last=True, threshold_factor=3600):
                        threshold_factor=threshold_factor)
 
 
-class LocatorBase(object):
+class LocatorBase:
     def __init__(self, den, include_last=True):
         self.den = den
         self._include_last = include_last
@@ -207,7 +207,7 @@ class LocatorD(LocatorBase):
                               threshold_factor=1)
 
 
-class FormatterDMS(object):
+class FormatterDMS:
     deg_mark = r"^{\circ}"
     min_mark = r"^{\prime}"
     sec_mark = r"^{\prime\prime}"
@@ -308,7 +308,7 @@ class FormatterDMS(object):
                 return r
 
         else:  # factor > 3600.
-            return [r"$%s^{\circ}$" % (str(v),) for v in ss*values]
+            return [r"${}^{{\circ}}$".format(str(v)) for v in ss*values]
 
 
 class FormatterHMS(FormatterDMS):

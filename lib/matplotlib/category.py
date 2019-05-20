@@ -155,7 +155,7 @@ class StrCategoryFormatter(ticker.Formatter):
         return value
 
 
-class UnitData(object):
+class UnitData:
     def __init__(self, data=None):
         """
         Create mapping between unique categorical values and integer ids.
@@ -205,7 +205,7 @@ class UnitData(object):
         for val in OrderedDict.fromkeys(data):
             # OrderedDict just iterates over unique values in data.
             if not isinstance(val, (str, bytes)):
-                raise TypeError("{val!r} is not a string".format(val=val))
+                raise TypeError(f"{val!r} is not a string")
             if convertible:
                 # this will only be called so long as convertible is True.
                 convertible = self._str_is_convertible(val)

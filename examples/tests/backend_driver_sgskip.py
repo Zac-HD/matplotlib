@@ -321,7 +321,7 @@ def report_missing(dir, flist):
     flist = set(flist)
     missing = list(pyfiles - flist - exclude)
     if missing:
-        print('%s files not tested: %s' % (dir, ', '.join(sorted(missing))))
+        print('{} files not tested: {}'.format(dir, ', '.join(sorted(missing))))
 
 
 def report_all_missing(directories):
@@ -409,7 +409,7 @@ def drive(backend, directories, python=['python'], switches=[]):
         program = [x % {'name': basename} for x in python]
         ret = run(program + [tmpfile_name] + switches)
         end_time = time.time()
-        print("%s %s" % ((end_time - start_time), ret))
+        print("{} {}".format((end_time - start_time), ret))
         # subprocess.call([python, tmpfile_name] + switches)
         os.remove(tmpfile_name)
         if ret:
@@ -491,7 +491,7 @@ if __name__ == '__main__':
 
     report_all_missing(options.dirs)
     for backend in options.backends:
-        print('testing %s %s' % (backend, ' '.join(options.switches)))
+        print('testing {} {}'.format(backend, ' '.join(options.switches)))
         t0 = time.time()
         failures[backend] = \
             drive(backend, options.dirs, python, options.switches)
@@ -499,10 +499,10 @@ if __name__ == '__main__':
         times[backend] = (t1 - t0) / 60
 
     for backend, elapsed in times.items():
-        print('Backend %s took %1.2f minutes to complete' % (backend, elapsed))
+        print(f'Backend {backend} took {elapsed:1.2f} minutes to complete')
         failed = failures[backend]
         if failed:
             print('  Failures: %s' % failed)
         if 'template' in times:
-            print('\ttemplate ratio %1.3f, template residual %1.3f' % (
+            print('\ttemplate ratio {:1.3f}, template residual {:1.3f}'.format(
                 elapsed/times['template'], elapsed - times['template']))

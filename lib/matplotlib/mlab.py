@@ -1398,7 +1398,7 @@ def _csv2rec(fname, comments='#', skiprows=0, checkrows=0, delimiter=',',
     return r
 
 
-class GaussianKDE(object):
+class GaussianKDE:
     """
     Representation of a kernel-density estimate using Gaussian kernels.
 

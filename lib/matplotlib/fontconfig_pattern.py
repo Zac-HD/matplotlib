@@ -27,7 +27,7 @@ value_unescape = re.compile(r'\\([%s])' % value_punc).sub
 value_escape = re.compile(r'([%s])' % value_punc).sub
 
 
-class FontconfigPatternParser(object):
+class FontconfigPatternParser:
     """
     A simple pyparsing-based parser for `fontconfig patterns`_.
 
@@ -121,7 +121,7 @@ class FontconfigPatternParser(object):
             self._parser.parseString(pattern)
         except self.ParseException as e:
             raise ValueError(
-                "Could not parse font string: '%s'\n%s" % (pattern, e))
+                f"Could not parse font string: '{pattern}'\n{e}")
 
         self._properties = None
 
@@ -182,5 +182,5 @@ def generate_fontconfig_pattern(d):
                        if x is not None]
                 if val != []:
                     val = ','.join(val)
-            props.append(":%s=%s" % (key, val))
+            props.append(f":{key}={val}")
     return ''.join(props)

@@ -46,7 +46,7 @@ class CleanupTestCase(unittest.TestCase):
 
 
 @cbook.deprecated("3.0")
-class CleanupTest(object):
+class CleanupTest:
     setup_class = classmethod(CleanupTestCase.setUpClass.__func__)
     teardown_class = classmethod(CleanupTestCase.tearDownClass.__func__)
 
@@ -152,7 +152,7 @@ def _skip_if_format_is_uncomparable(extension):
     import pytest
     return pytest.mark.skipif(
         extension not in comparable_formats(),
-        reason='Cannot compare {} files on this system'.format(extension))
+        reason=f'Cannot compare {extension} files on this system')
 
 
 def _mark_skip_if_format_is_uncomparable(extension):
@@ -174,7 +174,7 @@ def _mark_skip_if_format_is_uncomparable(extension):
                         marks=[*marks, _skip_if_format_is_uncomparable(name)])
 
 
-class _ImageComparisonBase(object):
+class _ImageComparisonBase:
     """
     Image comparison base class
 

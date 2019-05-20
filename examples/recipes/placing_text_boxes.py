@@ -21,9 +21,9 @@ mu = x.mean()
 median = np.median(x)
 sigma = x.std()
 textstr = '\n'.join((
-    r'$\mu=%.2f$' % (mu, ),
-    r'$\mathrm{median}=%.2f$' % (median, ),
-    r'$\sigma=%.2f$' % (sigma, )))
+    fr'$\mu={mu:.2f}$',
+    fr'$\mathrm{{median}}={median:.2f}$',
+    fr'$\sigma={sigma:.2f}$'))
 
 ax.hist(x, 50)
 # these are matplotlib.patch.Patch properties

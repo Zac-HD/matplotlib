@@ -3,7 +3,7 @@
 import operator
 
 
-class Duration(object):
+class Duration:
     """Class Duration in development.
     """
     allowed = ["ET", "UTC"]
@@ -158,11 +158,11 @@ class Duration(object):
 
     def __str__(self):
         """Print the Duration."""
-        return "%g %s" % (self._seconds, self._frame)
+        return f"{self._seconds:g} {self._frame}"
 
     def __repr__(self):
         """Print the Duration."""
-        return "Duration('%s', %g)" % (self._frame, self._seconds)
+        return f"Duration('{self._frame}', {self._seconds:g})"
 
     def checkSameFrame(self, rhs, func):
         """Check to see if frames are the same.
