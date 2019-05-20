@@ -46,7 +46,7 @@ def autolabel(rects, xpos='center'):
 
     for rect in rects:
         height = rect.get_height()
-        ax.annotate(f'{height}',
+        ax.annotate(str(height),
                     xy=(rect.get_x() + rect.get_width() / 2, height),
                     xytext=(offset[xpos]*3, 3),  # use 3 points offset
                     textcoords="offset points",  # in both directions

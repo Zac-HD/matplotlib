@@ -59,8 +59,8 @@ for col, ve in zip(axs.T, [0.1, 1, 10]):
         ax.imshow(rgb)
 
 # Label rows and columns
-for ax, ve in zip(axs[0], [0.1, 1, 10]):
-    ax.set_title(f'{ve}', size=18)
+for ax, ve in zip(axs[0], ["0.1", "1", "10"]):
+    ax.set_title(ve, size=18)
 for ax, mode in zip(axs[:, 0], ['Hillshade', 'hsv', 'overlay', 'soft']):
     ax.set_ylabel(mode, size=18)
 

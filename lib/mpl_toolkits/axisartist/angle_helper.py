@@ -308,7 +308,7 @@ class FormatterDMS:
                 return r
 
         else:  # factor > 3600.
-            return [r"${}^{{\circ}}$".format(str(v)) for v in ss*values]
+            return [r"$%s^{\circ}$" % (str(v),) for v in ss*values]
 
 
 class FormatterHMS(FormatterDMS):

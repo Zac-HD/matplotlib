@@ -162,8 +162,7 @@ class TriInterpolator:
         y = np.asarray(y, dtype=np.float64)
         sh_ret = x.shape
         if x.shape != y.shape:
-            raise ValueError("x and y shall have same shapes."
-                             " Given: {} and {}".format(x.shape, y.shape))
+            raise ValueError(f"x.shape={x.shape} != y.shape{y.shape}")
         x = np.ravel(x)
         y = np.ravel(y)
         x_scaled = x/self._unit_x
@@ -176,9 +175,9 @@ class TriInterpolator:
         else:
             if tri_index.shape != sh_ret:
                 raise ValueError(
-                    "tri_index array is provided and shall"
-                    " have same shape as x and y. Given: "
-                    "{} and {}".format(tri_index.shape, sh_ret))
+                    f"tri_index array of shape {tri_index.shape} is provided "
+                    f"but does not have the same shape as x and y {sh_ret}."
+                )
             tri_index = np.ravel(tri_index)
 
         mask_in = (tri_index != -1)
@@ -484,9 +483,8 @@ class CubicTriInterpolator(TriInterpolator):
         elif kind == 'min_E':
             TE = _DOF_estimator_min_E(self)
         else:
-            raise ValueError("CubicTriInterpolator *kind* proposed: {}; "
-                             "should be one of: "
-                             "'user', 'geom', 'min_E'".format(kind))
+            raise ValueError(f"CubicTriInterpolator kind={kind!r}; "
+                             "should be one of: 'user', 'geom', 'min_E'")
         return TE.compute_dof_from_df()
 
     @staticmethod

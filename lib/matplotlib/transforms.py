@@ -231,7 +231,7 @@ class TransformNode:
                 props['label'] = '"%s"' % label
                 props = ' '.join(map('{0[0]}={0[1]}'.format, props.items()))
 
-                fobj.write('{} [{}];\n'.format(hash(root), props))
+                fobj.write(f'{hash(root)} [{props}];\n')
 
                 if hasattr(root, '_children'):
                     for child in root._children:

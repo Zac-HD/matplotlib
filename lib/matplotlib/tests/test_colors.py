@@ -465,8 +465,7 @@ def test_cmap_and_norm_from_levels_and_colors2():
             else:
                 d_val = [d_val]
             assert_array_equal(expected_color, cmap(norm(d_val))[0],
-                               'Wih extend={!r} and data '
-                               'value={!r}'.format(extend, d_val))
+                               f'With extend={extend!r} and value={value!r}')
 
     with pytest.raises(ValueError):
         mcolors.from_levels_and_colors(levels, colors)

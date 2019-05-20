@@ -409,7 +409,7 @@ def drive(backend, directories, python=['python'], switches=[]):
         program = [x % {'name': basename} for x in python]
         ret = run(program + [tmpfile_name] + switches)
         end_time = time.time()
-        print("{} {}".format((end_time - start_time), ret))
+        print(f"{end_time - start_time} {ret}")
         # subprocess.call([python, tmpfile_name] + switches)
         os.remove(tmpfile_name)
         if ret:

@@ -240,8 +240,7 @@ class FigureCanvasWebAggCore(backend_agg.FigureCanvasAgg):
         return handler(event)
 
     def handle_unknown_event(self, event):
-        _log.warning('Unhandled message type {}. {}'.format(
-                     event['type'], event))
+        _log.warning(f'Unhandled message type {event['type']}. {event}')
 
     def handle_ack(self, event):
         # Network latency tends to decrease if traffic is flowing
@@ -461,8 +460,7 @@ class FigureManagerWebAgg(backend_bases.FigureManagerBase):
                 toolitems.append(['', '', '', ''])
             else:
                 toolitems.append([name, tooltip, image, method])
-        output.write("mpl.toolbar_items = {};\n\n".format(
-            json.dumps(toolitems)))
+        output.write(f"mpl.toolbar_items = {json.dumps(toolitems)};\n\n")
 
         extensions = []
         for filetype, ext in sorted(FigureCanvasWebAggCore.
@@ -470,8 +468,7 @@ class FigureManagerWebAgg(backend_bases.FigureManagerBase):
                                     items()):
             if not ext[0] == 'pgf':  # pgf does not support BytesIO
                 extensions.append(ext[0])
-        output.write("mpl.extensions = {};\n\n".format(
-            json.dumps(extensions)))
+        output.write(f"mpl.extensions = {json.dumps(extensions)};\n\n")
 
         output.write("mpl.default_extension = {};".format(
             json.dumps(FigureCanvasWebAggCore.get_default_filetype())))

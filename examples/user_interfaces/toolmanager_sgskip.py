@@ -41,7 +41,7 @@ class ListTools(ToolBase):
         print("{:12} {:45}".format("Group", "Active"))
         print('-' * 80)
         for group, active in self.toolmanager.active_toggle.items():
-            print("{:12} {:45}".format(str(group), str(active)))
+            print(f"{group:12} {active:45}")
 
 
 class GroupHideTool(ToolToggleBase):

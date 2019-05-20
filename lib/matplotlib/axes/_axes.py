@@ -5719,8 +5719,8 @@ optional.
             Y = y.repeat(Nx, axis=1)
         if X.shape != Y.shape:
             raise TypeError(
-                'Incompatible X, Y inputs to {}; see help({})'.format(
-                funcname, funcname))
+                f"Incompatible X, Y inputs to {funcname}; see help({funcname})"
+            )
         if allmatch:
             if (Nx, Ny) != (numCols, numRows):
                 raise TypeError('Dimensions of C %s are incompatible with'

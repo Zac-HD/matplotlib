@@ -205,7 +205,9 @@ class UnitData:
         for val in OrderedDict.fromkeys(data):
             # OrderedDict just iterates over unique values in data.
             if not isinstance(val, (str, bytes)):
-                raise TypeError(f"{val!r} is not a string")
+                raise TypeError(
+                    f"{val!r} is a {type(val).__name__}, not a string"
+                )
             if convertible:
                 # this will only be called so long as convertible is True.
                 convertible = self._str_is_convertible(val)
